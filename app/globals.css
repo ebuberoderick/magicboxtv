@@ -2,20 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+.bannerImg {
+  background-image: url("../public/image/bannerImg.png");
+  background-size: cover;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+
+.bannerGrident {
+  background: rgb(0, 0, 0);
+  background: linear-gradient(0deg, #030712 2%, rgba(0, 0, 0, 0.04243704317664565) 51%, #030712 95%);
+}
+
+
+.marquee {
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  animation: marquee 100s linear infinite alternate;
+}
+
+.marquee2 {
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  animation: marquee2 120s linear infinite alternate;
+}
+
+.marquee3 {
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  animation: marquee2 100s linear infinite alternate;
+}
+
+.marquee4 {
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  animation: marquee 120s linear infinite alternate;
+}
+
+
+@keyframes marquee {
+  from {
+    transform: translateX(-3%);
+  }
+
+  to {
+    transform: translateX(-75%);
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes marquee2 {
+  to {
+    transform: translateX(-3%);
+  }
+
+  from {
+    transform: translateX(-75%);
+  }
+}
+
+.textborder {
+  font-family: "Miltonian Tattoo";
+  text-shadow: 2px 2px 0 #4074b5, 2px -2px 0 #4074b5, -2px 2px 0 #4074b5, -2px -2px 0 #4074b5, 2px 0px 0 #4074b5, 0px 2px 0 #4074b5, -2px 0px 0 #4074b5, 0px -2px 0 #4074b5, 5px 40px 20px rgba(255, 255, 255, 0)
+}
+
+.imgBG {
+  background-image: url("../public/image/img.png");
+  background-size: cover;
 }

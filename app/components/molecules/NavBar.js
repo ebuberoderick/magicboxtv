@@ -9,12 +9,12 @@ import AppNavLink from '../organisms/AppNavLink';
 
 function NavBar({active}) {
     return (
-        <div className='fixed backdrop-blur-md w-screen top-0 right-0'>
+        <div className='fixed z-50 backdrop-blur-md w-screen top-0 right-0'>
             <div className='max-w-7xl justify-between p-4 items-center mx-auto flex'>
                 <div className='px-4'>
-                    <Link href="/"><Image src={logo} alt='LOGO' width={50} /></Link>
+                    <Link href="/"><Image src={logo} alt='LOGO' width={30} /></Link>
                 </div>
-                <div>
+                <div className=''>
                     <div className='bg-gray-950 border-[3px] flex rounded-lg border-gray-700 px-1 py-1'>
                         <AppNavLink active={active} text="home" />
                         <AppNavLink active={active} text="movies" />
@@ -22,12 +22,12 @@ function NavBar({active}) {
                         <AppNavLink active={active} text="subscriptions" />
                     </div>
                 </div>
-                <div className='text-white hidden text-2xl lg:flex items-center'>
+                <div className='text-white hidden text-2xl md:flex items-center'>
                     <div className='p-3 cursor-pointer'><FiSearch /></div>
                     <div className='p-3 cursor-pointer'><FaRegBell /></div>
                 </div>
-                <div className='text-white lg:hidden text-2xl flex items-center'>
-                    <div className='p-3 cursor-pointer border-2 border-gray-800 bg-gray-600/25 rounded-lg '><HiOutlineMenuAlt3 /></div>
+                <div className='text-white md:hidden text-2xl flex items-center'>
+                    <div className='p-2 cursor-pointer border-2 border-gray-800 bg-gray-600/25 rounded-lg '><HiOutlineMenuAlt3 /></div>
                 </div>
             </div>
         </div>

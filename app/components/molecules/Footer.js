@@ -10,8 +10,8 @@ function Footer() {
         <div className='bg-black divide-y divide-gray-900 md:px-20 px-4'>
             <div className='grid grid-cols-2 gap-y-7 md:grid-cols-4 lg:grid-cols-6 py-12 md:py-20'>
                 <div className='space-y-3'>
-                    <h1 className='text-lg font-bold text-white'>Home</h1>
-                    <div className='space-y-2'>
+                    <h1 className='md:text-lg font-bold text-white'>Home</h1>
+                    <div className='text-xs md:text-base space-y-2'>
                         <div>
                             <Link href='/' className='text-gray-500 hover:text-white'>
                                 <div>Categories</div>
@@ -35,8 +35,8 @@ function Footer() {
                     </div>
                 </div>
                 <div className='space-y-3'>
-                    <h1 className='text-lg font-bold text-white'>Movies</h1>
-                    <div className='space-y-2'>
+                    <h1 className='md:text-lg font-bold text-white'>Movies</h1>
+                    <div className='text-xs space-y-2'>
                         <div>
                             <Link href='/' className='text-gray-500 hover:text-white'>
                                 <div>Gernes</div>
@@ -60,8 +60,8 @@ function Footer() {
                     </div>
                 </div>
                 <div className='space-y-3'>
-                    <h1 className='text-lg font-bold text-white'>Shows</h1>
-                    <div className='space-y-2'>
+                    <h1 className='md:text-lg font-bold text-white'>Shows</h1>
+                    <div className='text-xs space-y-2'>
                         <div>
                             <Link href='/' className='text-gray-500 hover:text-white'>
                                 <div>Gernes</div>
@@ -85,8 +85,8 @@ function Footer() {
                     </div>
                 </div>
                 <div className='space-y-3'>
-                    <h1 className='text-lg font-bold text-white'>Support</h1>
-                    <div className='space-y-2'>
+                    <h1 className='md:text-lg font-bold text-white'>Support</h1>
+                    <div className='text-xs space-y-2'>
                         <div>
                             <Link href='/' className='text-gray-500 hover:text-white'>
                                 <div>Contact Us</div>
@@ -95,8 +95,8 @@ function Footer() {
                     </div>
                 </div>
                 <div className='space-y-3'>
-                    <h1 className='text-lg font-bold text-white'>Subscription</h1>
-                    <div className='space-y-2'>
+                    <h1 className='md:text-lg font-bold text-white'>Subscription</h1>
+                    <div className='text-xs space-y-2'>
                         <div>
                             <Link href='/' className='text-gray-500 hover:text-white'>
                                 <div>Plans</div>
@@ -114,21 +114,21 @@ function Footer() {
                     <div className='flex gap-2'>
                         <div>
                             <Link href='/'>
-                                <div className='w-12 text-white text-2xl h-12 border-2 rounded-lg border-gray-800 bg-gray-600/25 flex items-center justify-center'>
+                                <div className='md:w-12 w-8 text-white md:text-2xl md:h-12 h-8 border-2 rounded-lg border-gray-800 bg-gray-600/25 flex items-center justify-center'>
                                     <MdFacebook />
                                 </div>
                             </Link>
                         </div>
                         <div>
                             <Link href='/'>
-                                <div className='w-12 text-white text-2xl h-12 border-2 rounded-lg border-gray-800 bg-gray-600/25 flex items-center justify-center'>
+                                <div className='md:w-12 w-8 text-white md:text-2xl md:h-12 h-8 border-2 rounded-lg border-gray-800 bg-gray-600/25 flex items-center justify-center'>
                                     <FaTwitter />
                                 </div>
                             </Link>
                         </div>
                         <div>
                             <Link href='/'>
-                                <div className='w-12 text-white text-2xl h-12 border-2 rounded-lg border-gray-800 bg-gray-600/25 flex items-center justify-center'>
+                                <div className='md:w-12 w-8 text-white md:text-2xl md:h-12 h-8 border-2 rounded-lg border-gray-800 bg-gray-600/25 flex items-center justify-center'>
                                     <RxLinkedinLogo />
                                 </div>
                             </Link>
