@@ -46,8 +46,6 @@ function TrendingCard({ viewsType }) {
                         </div>
                     )
                 }
-
-
             </div>
         </div>
     )

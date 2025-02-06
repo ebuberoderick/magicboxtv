@@ -73,6 +73,18 @@
   background-size: cover;
 }
 
+.seriesbannerimgBG{
+  background-image: url("../public/image/series.png");
+  background-size: cover;
+}
+
+
+.moviebannerimgBG{
+  background-image: url("../public/image/movie.png");
+  background-size: cover;
+}
+
+
 .imgBG {
   background-image: url("../public/image/img.png");
   background-size: cover;
