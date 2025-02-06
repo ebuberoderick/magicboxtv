@@ -10,11 +10,15 @@ import { CiCalendar, CiGrid41 } from "react-icons/ci";
 import { HiOutlineTranslate } from "react-icons/hi";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import SeasonDetails from "../../components/molecules/SeasonDetails";
+import { GoPlus } from "react-icons/go";
+import EmblaMovies from '@/app/components/molecules/EmblaMovies';
+import EmblaTestimony from '@/app/components/molecules/EmblaTestimony';
+import TestimonyCard from '@/app/components/organisms/TestimonyCard';
 
 function Page() {
   return (
     <AppLayout active="movies">
-      <div className="h-screen bg-gray-950 pt-24 pb-10 px-4">
+      <div className="h-screen w- bg-gray-950 pt-24 pb-10 px-4">
         <div className="overflow-hidden h-full max-w-7xl mx-auto rounded-lg moviebannerimgBG">
           <div className="relative h-full p-6 flex items-end bg-gradient-to-t from-gray-950 to-[#00000000]">
             <div className="p-5 space-y-5 w-full text-center">
@@ -58,137 +62,45 @@ function Page() {
       <div className="pb-24">
         <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           <div className="lg:col-span-2 space-y-4">
-            <div className="px-6 text-sm font-medium md:text-base lg:px-12 py-6 lg:py-10 bg-gray-900/50 rounded-lg">
+            <div className="px-6 text-sm font-medium space-y-4 md:text-base lg:px-12 py-6 lg:py-10 bg-gray-900/50 rounded-lg">
               <div className="text-gray-400/50">Description</div>
               <div className="text-white">When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces and one strange little girl.</div>
             </div>
-          </div>
-          <div className="w-full">
-            <div className="px-6 lg:px-12 space-y-4 py-6 lg:py-10 bg-gray-900/50 rounded-lg">
-              <div className="space-y-2">
-                <div className="text-gray-400 flex items-center">
-                  <div className="relative top-[2px] text-xl"><CiCalendar /></div>
-                  <div className="text-sm md:text-base">Released Year</div>
-                </div>
-                <div className="text-white font-semibold">2022</div>
-              </div>
-              <div className="space-y-2 w-full">
-                <div className="text-gray-400 flex items-center">
-                  <div className="relative top-[2px] text-xl"><HiOutlineTranslate /></div>
-                  <div className="text-sm md:text-base">Available Languages</div>
-                </div>
-                <div className="flex items-center gap-2 w-full flex-wrap">
-                  {
-                    ["English", "Hindi", "Spanish", "French", "German"].map((lang, index) => {
-                      return (
-                        <div key={index} className="text-white bg-gray-950 text-sm rounded-lg px-4 py-2 border border-gray-800 font-semibold">{lang}</div>
-                      )
-                    })
-                  }
+            <div className="md:hidden">
+              <DescriptionCard />
+            </div>
+            <div className="px-6 text-sm font-medium md:text-base lg:px-12 py-6 lg:py-10 bg-gray-900/50 rounded-lg">
+              <EmblaMovies title="Cast" >
+                {Array.from(Array(15).keys()).map((index, i) => (
+                  <div className="[flex:_0_0_89px]" key={i}>
+                    <div className="bg-gray-700 rounded-md overflow-hidden h-20"></div>
+                  </div>
+                ))}
+              </EmblaMovies>
+            </div>
+            <div className="px-6 text-sm font-medium md:text-base lg:px-12 py-6 lg:py-10 bg-gray-900/50 rounded-lg">
+              <div className="flex w-full text-white items-center justify-between">
+                <div className="text-gray-400/50">Reviews</div>
+                <div className="">
+                  <div className="bg-gray-950 gap-2 flex items-center text-sm rounded-lg py-2 px-6 cursor-pointer border border-gray-800">
+                    <div className="text-2xl"><GoPlus /></div>
+                    <div className="">Add Your Review</div>
+                  </div>
                 </div>
               </div>
-              <div className="space-y-2">
-                <div className="text-gray-400 flex items-center">
-                  <div className="relative"><FaRegStar /></div>
-                  <div className="text-sm md:text-base">Ratings</div>
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-gray-950 text-sm rounded-lg p-3 space-y-2 border border-gray-800 font-semibold">
-                    <div className="font-semibold text-white">IMDb</div>
-                    <div className="">
-                      <div className='flex items-center text-gray-400/50 gap-2'>
-                        <div className="flex gap-1 text-sm">
-                          <FaStar
-                            className='text-pink'
-                          />
-                          <FaStar
-                            className='text-pink'
-                          />
-                          <FaStar
-                            className='text-pink'
-                          />
-                          <FaStar
-                            className='text-pink'
-                          />
-                          <FaStar
-                            className=''
-                          />
-                        </div>
-                        <span className='text-white'>4</span>
-                      </div>
+              <div className="hidden md:block">
+                <EmblaTestimony options={{ align: 'start', dragFree: true, loop: true }}>
+                  {Array.from(Array(8).keys()).map((index, i) => (
+                    <div className="[flex:_0_0_100%] lg:[flex:_0_0_49.5%]" key={i}>
+                      <TestimonyCard />
                     </div>
-                  </div>
-                  <div className="bg-gray-950 text-sm rounded-lg p-3 space-y-2 border border-gray-800 font-semibold">
-                    <div className="font-semibold text-white">Streamvibe</div>
-                    <div className="">
-                      <div className='flex items-center text-gray-400/50 gap-2'>
-                        <div className="flex gap-1 text-sm">
-                          <FaStar
-                            className='text-pink'
-                          />
-                          <FaStar
-                            className='text-pink'
-                          />
-                          <FaStar
-                            className='text-pink'
-                          />
-                          <FaStar
-                            className='text-pink'
-                          />
-                          <FaStar
-                            className=''
-                          />
-                        </div>
-                        <span className='text-white'>4</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="space-y-2 w-full">
-                <div className="text-gray-400 flex items-center">
-                  <div className="relative top-[2px] text-xl"><CiGrid41 /></div>
-                  <div className="text-sm md:text-base">Gernes</div>
-                </div>
-                <div className="flex items-center gap-2 w-full flex-wrap">
-                  {
-                    ["Sci-Fi TV", "Teen TV Shows", "US TV Shows"].map((lang, index) => {
-                      return (
-                        <div key={index} className="text-white bg-gray-950 text-sm rounded-lg px-4 py-2 border border-gray-800 font-semibold">{lang}</div>
-                      )
-                    })
-                  }
-                </div>
-              </div>
-              <div className="space-y-2 w-full">
-                <div className="text-gray-400 flex items-center">
-                  <div className="text-sm md:text-base">Director</div>
-                </div>
-                <div className="bg-gray-950 gap-2 items-start flex text-sm rounded-lg p-3 space-y-2 border border-gray-800 font-semibold">
-                  <div className="">
-                    <div className="w-12 h-12 rounded-lg bg-gray-800"></div>
-                  </div>
-                  <div className="flex-grow">
-                    <div className="text-white font-medium">Rishab Shetty</div>
-                    <div className="font-medium text-gray-400/50">From India</div>
-                  </div>
-                </div>
-              </div>
-              <div className="space-y-2 w-full">
-                <div className="text-gray-400 flex items-center">
-                  <div className="text-sm md:text-base">Music</div>
-                </div>
-                <div className="bg-gray-950 gap-2 items-start flex text-sm rounded-lg p-3 space-y-2 border border-gray-800 font-semibold">
-                  <div className="">
-                    <div className="w-12 h-12 rounded-lg bg-gray-800"></div>
-                  </div>
-                  <div className="flex-grow">
-                    <div className="text-white font-medium">B. Ajaneesh Loknath</div>
-                    <div className="font-medium text-gray-400/50">From India</div>
-                  </div>
-                </div>
+                  ))}
+                </EmblaTestimony>
               </div>
             </div>
+          </div>
+          <div className="w-full hidden md:block">
+            <DescriptionCard />
           </div>
         </div>
       </div>
@@ -197,3 +109,133 @@ function Page() {
 }
 
 export default Page
+
+function DescriptionCard() {
+  return (
+    <div className="px-6 lg:px-12 space-y-4 py-6 lg:py-10 bg-gray-900/50 rounded-lg">
+      <div className="space-y-2">
+        <div className="text-gray-400 flex items-center">
+          <div className="relative text-xl"><CiCalendar /></div>
+          <div className="text-sm md:text-base">Released Year</div>
+        </div>
+        <div className="text-white font-semibold">2022</div>
+      </div>
+      <div className="space-y-2 w-full">
+        <div className="text-gray-400 flex items-center">
+          <div className="relative top-[2px] text-xl"><HiOutlineTranslate /></div>
+          <div className="text-sm md:text-base">Available Languages</div>
+        </div>
+        <div className="flex items-center gap-2 w-full flex-wrap">
+          {
+            ["English", "Hindi", "Spanish", "French", "German"].map((lang, index) => {
+              return (
+                <div key={index} className="text-white bg-gray-950 text-sm rounded-lg px-4 py-2 border border-gray-800 font-semibold">{lang}</div>
+              )
+            })
+          }
+        </div>
+      </div>
+      <div className="space-y-2">
+        <div className="text-gray-400 flex items-center">
+          <div className="relative"><FaRegStar /></div>
+          <div className="text-sm md:text-base">Ratings</div>
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="bg-gray-950 text-sm rounded-lg p-3 space-y-2 border border-gray-800 font-semibold">
+            <div className="font-semibold text-white">IMDb</div>
+            <div className="">
+              <div className='flex items-center text-gray-400/50 gap-2'>
+                <div className="flex gap-1 text-sm">
+                  <FaStar
+                    className='text-pink'
+                  />
+                  <FaStar
+                    className='text-pink'
+                  />
+                  <FaStar
+                    className='text-pink'
+                  />
+                  <FaStar
+                    className='text-pink'
+                  />
+                  <FaStar
+                    className=''
+                  />
+                </div>
+                <span className='text-white'>4</span>
+              </div>
+            </div>
+          </div>
+          <div className="bg-gray-950 text-sm rounded-lg p-3 space-y-2 border border-gray-800 font-semibold">
+            <div className="font-semibold text-white">Streamvibe</div>
+            <div className="">
+              <div className='flex items-center text-gray-400/50 gap-2'>
+                <div className="flex gap-1 text-sm">
+                  <FaStar
+                    className='text-pink'
+                  />
+                  <FaStar
+                    className='text-pink'
+                  />
+                  <FaStar
+                    className='text-pink'
+                  />
+                  <FaStar
+                    className='text-pink'
+                  />
+                  <FaStar
+                    className=''
+                  />
+                </div>
+                <span className='text-white'>4</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="space-y-2 w-full">
+        <div className="text-gray-400 flex items-center">
+          <div className="relative top-[2px] text-xl"><CiGrid41 /></div>
+          <div className="text-sm md:text-base">Gernes</div>
+        </div>
+        <div className="flex items-center gap-2 w-full flex-wrap">
+          {
+            ["Sci-Fi TV", "Teen TV Shows", "US TV Shows"].map((lang, index) => {
+              return (
+                <div key={index} className="text-white bg-gray-950 text-sm rounded-lg px-4 py-2 border border-gray-800 font-semibold">{lang}</div>
+              )
+            })
+          }
+        </div>
+      </div>
+      <div className="space-y-2 w-full">
+        <div className="text-gray-400 flex items-center">
+          <div className="text-sm md:text-base">Director</div>
+        </div>
+        <div className="bg-gray-950 gap-2 items-start flex text-sm rounded-lg p-3 space-y-2 border border-gray-800 font-semibold">
+          <div className="">
+            <div className="w-12 h-12 rounded-lg bg-gray-800"></div>
+          </div>
+          <div className="flex-grow">
+            <div className="text-white font-medium">Rishab Shetty</div>
+            <div className="font-medium text-gray-400/50">From India</div>
+          </div>
+        </div>
+      </div>
+      <div className="space-y-2 w-full">
+        <div className="text-gray-400 flex items-center">
+          <div className="text-sm md:text-base">Music</div>
+        </div>
+        <div className="bg-gray-950 gap-2 items-start flex text-sm rounded-lg p-3 space-y-2 border border-gray-800 font-semibold">
+          <div className="">
+            <div className="w-12 h-12 rounded-lg bg-gray-800"></div>
+          </div>
+          <div className="flex-grow">
+            <div className="text-white font-medium">B. Ajaneesh Loknath</div>
+            <div className="font-medium text-gray-400/50">From India</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
