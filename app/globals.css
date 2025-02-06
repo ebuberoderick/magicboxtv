@@ -68,6 +68,11 @@
   text-shadow: 2px 2px 0 #4074b5, 2px -2px 0 #4074b5, -2px 2px 0 #4074b5, -2px -2px 0 #4074b5, 2px 0px 0 #4074b5, 0px 2px 0 #4074b5, -2px 0px 0 #4074b5, 0px -2px 0 #4074b5, 5px 40px 20px rgba(255, 255, 255, 0)
 }
 
+.bannerimgBG {
+  background-image: url("../public/image/bannerMovies.png");
+  background-size: cover;
+}
+
 .imgBG {
   background-image: url("../public/image/img.png");
   background-size: cover;

@@ -75,7 +75,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="max-w-sm mx-auto">
+        <div className="max-w-sm mx-auto px-4">
           <div className="border text-center relative border-gray-800 grid grid-cols-2 p-2 rounded-xl bg-black/60">
             <div className={`absolute z-0 w-1/2 h-[85%] transition-all duration-300 rounded-md top-1 right-1 bg-gray-900 ${activeTab === "movies" ? "left-1" : "left-[49%]"}`} />
             <div onClick={() => setActiveTab("movies")} className={`relative cursor-pointer py-2 z-20 ${activeTab === "movies" ? "text-white" : "text-gray-500"}`}>Movies</div>
