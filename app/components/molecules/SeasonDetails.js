@@ -30,7 +30,7 @@ function SeasonDetails() {
                                 <div className='text-gray-600 text-2xl font-semibold'>01</div>
                             </div>
                             <div className='flex-grow space-y-3'>
-                                <div className='flex items-center justify-between'>
+                                <div className='sm:flex md:block lg:flex items-center justify-between'>
                                     <div className='text-white font-semibold text-lg'>Chapter Three: Holly, Jolly</div>
                                     <div>
                                         <div className="text-gray-300/50 bg-gray-800/30 text-sm rounded-lg px-2 border border-gray-800 font-normal flex items-center justify-center gap-1"><IoTime /> 53 mins</div>
