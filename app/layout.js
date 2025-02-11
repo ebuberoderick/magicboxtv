@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 import "./globals.css";
 
 export const metadata = {
@@ -6,6 +7,14 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+
+  const getMsisdn = async () => {
+    const msisdn = await headers();
+    console.log(msisdn);
+  }
+
+  getMsisdn()
+
   return (
     <html lang="en">
       <body

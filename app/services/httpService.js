@@ -1,8 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import { SignOut } from "../hooks/Auth";
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";
-export const TOKEN =  `Bearer ${Cookies.get("magicboxtv")}`
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://api.magicbox.tv/api/v1/";
+export const TOKEN = `Bearer ${Cookies.get("magicboxtv")}`
 
 
 const timeoutConfig = {
@@ -31,9 +30,26 @@ export const apiWithAuth = axios.create({
     Accept: "application/json",
     "Content-Type": "application/json",
     Authorization: TOKEN,
+    msisdn: "sdfvdlfkl"
   },
   ...timeoutConfig,
 });
+
+
+
+apiWithAuth.interceptors.request.use((config,req) => {
+  console.log(config,req);
+  
+  // const msisdn = getMsisdn();
+  // if (msisdn) {
+  //   config.params = { ...config.params, msisdn };
+  // }
+  // return config;
+}, (error) => {
+  return Promise.reject(error);
+});
+
+
 
 export const getApiResponse = (data) => {
   // errors
@@ -48,7 +64,7 @@ export const getErrorResponse = (error) => {
     Cookies.remove('magicboxtv')
     window !== "undefined" && window.location.reload()
   }
-  
+
   return {
     status: false,
     data: error?.response?.data,
