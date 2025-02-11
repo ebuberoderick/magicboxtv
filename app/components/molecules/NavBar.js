@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
-import logo from "@/public/image/Magicboxlogo.png"
+import logo from "../../../public/image/Magicboxlogo.png"
 import Link from 'next/link'
 import { FiSearch } from "react-icons/fi";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
