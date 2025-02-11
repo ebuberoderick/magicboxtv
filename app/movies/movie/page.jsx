@@ -1,6 +1,4 @@
 "use client"
-import AppLayout from '@/app/components/layouts/appLayout'
-import AppButton from '@/app/components/organisms/AppButton'
 import { AiOutlinePlus } from "react-icons/ai";
 import { TiThumbsUp } from "react-icons/ti";
 import { IoPlay } from "react-icons/io5";
@@ -11,9 +9,11 @@ import { HiOutlineTranslate } from "react-icons/hi";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import SeasonDetails from "../../components/molecules/SeasonDetails";
 import { GoPlus } from "react-icons/go";
-import EmblaMovies from '@/app/components/molecules/EmblaMovies';
-import EmblaTestimony from '@/app/components/molecules/EmblaTestimony';
-import TestimonyCard from '@/app/components/organisms/TestimonyCard';
+import EmblaMovies from '../../components/molecules/EmblaMovies';
+import EmblaTestimony from '../../components/molecules/EmblaTestimony';
+import TestimonyCard from '../../components/organisms/TestimonyCard';
+import AppButton from "../../components/organisms/AppButton";
+import AppLayout from "../../components/layouts/appLayout";
 
 function Page() {
   return (
