@@ -27,7 +27,7 @@ const EmblaCarousel = (props) => {
                 <div className="flex items-center px-4 justify-between">
                     <div className='text-white font-bold text-xl xl:text-4xl'>{title}</div>
                     {
-                        scrollSnaps.length > 0 && (
+                        scrollSnaps.length > 1 && (
                             <div className="md:flex hidden items-center gap-3 bg-gray-800/25 p-3 border-2 border-gray-800 rounded-lg">
                                 <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
                                 <div className="flex items-center gap-1">

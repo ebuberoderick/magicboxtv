@@ -1,7 +1,9 @@
 import React from 'react'
 import { IoArrowForward } from "react-icons/io5";
 
-function GenresCard({ badge }) {
+function GenresCard({ badge, data }) {
+    console.log(data);
+    
     return (
         <div className='bg-gray-800/20 space-y-4 rounded-xl overflow-hidden relative border border-gray-800'>
             <div className='grid grid-cols-2 top-0 left-0 w-full p-6 absolute gap-2'>
@@ -16,7 +18,7 @@ function GenresCard({ badge }) {
                         {badge && <div>
                             <span className='font-semibold bg-blue py-2 text-sm px-3 text-white rounded-lg'>Top 10 In</span>
                         </div>}
-                        <div className='font-semibold'>Comedy</div>
+                        <div className='font-semibold'>{data?.name}</div>
                     </div>
                     <div className='text-xl'><IoArrowForward /></div>
                 </div>

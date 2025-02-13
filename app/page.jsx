@@ -8,13 +8,30 @@ import EmblaCarousel from "./components/molecules/EmblaCarousel";
 import MovieCard from "./components/organisms/MovieCard";
 import GenresCard from "./components/organisms/GenresCard";
 import TrendingCard from "./components/organisms/TrendingCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {fetchGenresAPI} from "./services/authService"
 
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("movies")
   const SLIDE_COUNT = 7
   const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
+
+  const [genres, setGenres] = useState([])
+
+  const fetchGenres = async() => {
+    const {status,data} = await fetchGenresAPI()
+    if (status) {
+      setGenres(data?.results);
+    }
+  }
+
+  useEffect(() => {
+    fetchGenres()
+  }, [])
+  
+
+
   return (
     <AppLayout active="home">
       <AppBanner />
@@ -66,9 +83,9 @@ export default function Home() {
           </div>
           <div className="">
             <EmblaCarousel options={{ align: 'start', dragFree: true, loop: false }}>
-              {SLIDES.map((index, i) => (
+              {genres.map((data, i) => (
                 <div className="[flex:_0_0_70%] md:[flex:_0_0_20%]" key={i}>
-                  <GenresCard />
+                  <GenresCard data={data} />
                 </div>
               ))}
             </EmblaCarousel>
@@ -88,9 +105,9 @@ export default function Home() {
             {
               activeTab === "movies" ? (
                 <EmblaCarousel title="New Releases" options={{ align: 'start', dragFree: true, loop: false }}>
-                  {SLIDES.map((index, i) => (
+                  {genres.map((data, i) => (
                     <div className="[flex:_0_0_70%]" key={i}>
-                      <GenresCard />
+                      <GenresCard data={data} />
                     </div>
                   ))}
                 </EmblaCarousel>
@@ -110,9 +127,9 @@ export default function Home() {
 
       <div className="max-w-[100%] md:max-w-[91%] space-y-16 py-16 ml-auto">
         <EmblaCarousel title="Popular Top 10 In Genres" options={{ align: 'start', dragFree: true, loop: false }}>
-          {SLIDES.map((index, i) => (
+          {genres.map((data, i) => (
             <div className="[flex:_0_0_70%] md:[flex:_0_0_20%]" key={i}>
-              <GenresCard badge />
+              <GenresCard data={data} badge />
             </div>
           ))}
         </EmblaCarousel>
@@ -146,9 +163,9 @@ export default function Home() {
         </div>
         <div className="space-y-16 px-4 py-12">
           <EmblaCarousel title="Our Genres" options={{ align: 'start', dragFree: true, loop: false }}>
-            {SLIDES.map((index, i) => (
+            {genres.map((data, i) => (
               <div className="[flex:_0_0_23.5%]" key={i}>
-                <GenresCard />
+                <GenresCard data={data} />
               </div>
             ))}
           </EmblaCarousel>
@@ -169,7 +186,7 @@ export default function Home() {
                 {
                   ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""].map((_, i) => (
                     <div key={i} className='w-40 md:w-32 h-full bg-gray-900/25 rounded-lg overflow-hidden'>
-                      <Image src={`https://source.unsplash.com/random/200`} className='h-full w-full' alt='' loading='lazy' width={100} height={100} />
+                      {/* <Image src={`https://source.unsplash.com/random/200`} className='h-full w-full' alt='' loading='lazy' width={100} height={100} /> */}
                     </div>
                   ))
                 }
@@ -180,7 +197,7 @@ export default function Home() {
                 {
                   ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""].map((_, i) => (
                     <div key={i} className='w-40 md:w-32 h-full bg-gray-900/25 rounded-lg overflow-hidden'>
-                      <Image src={`https://source.unsplash.com/random/200`} className='h-full w-full' alt='' loading='lazy' width={100} height={100} />
+                      {/* <Image src={`https://source.unsplash.com/random/200`} className='h-full w-full' alt='' loading='lazy' width={100} height={100} /> */}
                     </div>
                   ))
                 }
@@ -191,7 +208,7 @@ export default function Home() {
                 {
                   ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""].map((_, i) => (
                     <div key={i} className='w-40 md:w-32 h-full bg-gray-900/25 rounded-lg overflow-hidden'>
-                      <Image src={`https://source.unsplash.com/random/200`} className='h-full w-full' alt='' loading='lazy' width={100} height={100} />
+                      {/* <Image src={`https://source.unsplash.com/random/200`} className='h-full w-full' alt='' loading='lazy' width={100} height={100} /> */}
                     </div>
                   ))
                 }
