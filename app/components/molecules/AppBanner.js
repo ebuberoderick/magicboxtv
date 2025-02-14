@@ -5,11 +5,12 @@ import { TiThumbsUp } from "react-icons/ti";
 import { RxSpeakerLoud } from "react-icons/rx";
 import { IoPlay } from "react-icons/io5";
 import Image from 'next/image';
+import Link from 'next/link';
 
-function AppBanner({movie}) {
+function AppBanner({ movie }) {
     return (
         <>
-            <div className={`bg-cover bg-center hidden md:block`} style={{backgroundImage: `url(${movie[3]?.img_poster})`}}>
+            <div className={`bg-cover bg-center hidden md:block`} style={{ backgroundImage: `url(${movie[3]?.img_poster})` }}>
                 <div className="h-screen flex items-center justify-center bannerGrident">
                     <div className='w-full pt-56'>
                         <div className='max-w-7xl space-y-3 mx-auto text-white text-center'>
@@ -18,12 +19,14 @@ function AppBanner({movie}) {
                             <div className='text-sm px-3 lg:text-xl max-w-6xl mx-auto'>{movie[3]?.description}</div>
                             <div className='flex items-center justify-center gap-2'>
                                 <AppButton>
-                                    <div className='flex items-center gap-2'>
-                                        <IoPlay />
-                                        Play Now
-                                    </div>
+                                    <Link href={`/movies/${movie[3]?.id}`}>
+                                        <div className='flex items-center gap-2'>
+                                            <IoPlay />
+                                            Play Now
+                                        </div>
+                                    </Link>
                                 </AppButton>
-                                <div className='w-10 h-10 text-white text-lg bg-gray-950 rounded-lg cursor-pointer flex items-center justify-center'>
+                                {/* <div className='w-10 h-10 text-white text-lg bg-gray-950 rounded-lg cursor-pointer flex items-center justify-center'>
                                     <AiOutlinePlus />
                                 </div>
                                 <div className='w-10 h-10 text-white text-lg bg-gray-950 rounded-lg cursor-pointer flex items-center justify-center'>
@@ -31,7 +34,7 @@ function AppBanner({movie}) {
                                 </div>
                                 <div className='w-10 h-10 text-white text-lg bg-gray-950 rounded-lg cursor-pointer flex items-center justify-center'>
                                     <RxSpeakerLoud />
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>

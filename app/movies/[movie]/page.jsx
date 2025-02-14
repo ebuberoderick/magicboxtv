@@ -2,7 +2,7 @@
 import { AiOutlinePlus } from "react-icons/ai";
 import { TiThumbsUp } from "react-icons/ti";
 import { IoPlay } from "react-icons/io5";
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { RxSpeakerLoud } from "react-icons/rx";
 import { CiCalendar, CiGrid41 } from "react-icons/ci";
 import { HiOutlineTranslate } from "react-icons/hi";
@@ -14,17 +14,38 @@ import EmblaTestimony from '../../components/molecules/EmblaTestimony';
 import TestimonyCard from '../../components/organisms/TestimonyCard';
 import AppButton from "../../components/organisms/AppButton";
 import AppLayout from "../../components/layouts/appLayout";
+import { useParams } from "next/navigation";
+import { fetchMovieInfoAPI } from "../../services/authService";
 
 function Page() {
+  const { movie } = useParams();
+  const [movieInfo, setMovieInfo] = useState({})
+  const [loading, setLoading] = useState(true)
+
+  const fetchMovieData = async () => {
+    const { status, data } = await fetchMovieInfoAPI(movie)
+    console.log(data);
+    if (status) {
+      setMovieInfo(data);
+    }
+    setLoading(false)
+  }
+
+
+  useEffect(() => {
+    fetchMovieData()
+  }, [])
+
+
   return (
     <AppLayout active="movies">
       <div className="h-screen w- bg-gray-950 pt-24 pb-10 px-4">
-        <div className="overflow-hidden h-full max-w-7xl mx-auto rounded-lg moviebannerimgBG">
+        <div className="overflow-hidden h-full max-w-7xl mx-auto rounded-lg bg-cover bg-center " style={{ backgroundImage: `url(${movieInfo?.img_poster})` }}>
           <div className="relative h-full p-6 flex items-end bg-gradient-to-t from-gray-950 to-[#00000000]">
             <div className="p-5 space-y-5 w-full text-center">
               <div className="space-y-1">
-                <div className="text-white font-bold text-3xl">Kantara</div>
-                <div className="text-gray-400 max-w-3xl hidden md:block text-sm mx-auto">A fiery young man clashes with an unflinching forest officer in a south Indian village where spirituality, fate and folklore rule the lands.</div>
+                <div className="text-white font-bold text-3xl">{movieInfo?.title}</div>
+                <div className="text-gray-400 max-w-3xl hidden md:block text-sm mx-auto">{movieInfo?.description}</div>
               </div>
               <div className="md:flex items-center justify-center gap-3">
                 <div className="md:hidden">
@@ -43,7 +64,7 @@ function Page() {
                     </div>
                   </AppButton>
                 </div>
-                <div className="flex items-center justify-center gap-2">
+                {/* <div className="flex items-center justify-center gap-2">
                   <div className='w-10 h-10 text-white text-lg bg-gray-950 rounded-lg cursor-pointer flex items-center justify-center'>
                     <AiOutlinePlus />
                   </div>
@@ -53,7 +74,7 @@ function Page() {
                   <div className='w-10 h-10 text-white text-lg bg-gray-950 rounded-lg cursor-pointer flex items-center justify-center'>
                     <RxSpeakerLoud />
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -64,12 +85,14 @@ function Page() {
           <div className="lg:col-span-2 space-y-4">
             <div className="px-6 text-sm font-medium space-y-4 md:text-base lg:px-12 py-6 lg:py-10 bg-gray-900/50 rounded-lg">
               <div className="text-gray-400/50">Description</div>
-              <div className="text-white">When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces and one strange little girl.</div>
+              <div className="text-white">{movieInfo?.description}</div>
             </div>
             <div className="md:hidden">
-              <DescriptionCard />
+              {
+                !loading && <DescriptionCard data={movieInfo} />
+              }
             </div>
-            <div className="px-6 text-sm font-medium md:text-base lg:px-12 py-6 lg:py-10 bg-gray-900/50 rounded-lg">
+            {/* <div className="px-6 text-sm font-medium md:text-base lg:px-12 py-6 lg:py-10 bg-gray-900/50 rounded-lg">
               <EmblaMovies title="Cast" >
                 {Array.from(Array(15).keys()).map((index, i) => (
                   <div className="[flex:_0_0_89px]" key={i}>
@@ -77,8 +100,8 @@ function Page() {
                   </div>
                 ))}
               </EmblaMovies>
-            </div>
-            <div className="px-6 text-sm font-medium md:text-base lg:px-12 py-6 lg:py-10 bg-gray-900/50 rounded-lg">
+            </div> */}
+            {/* <div className="px-6 text-sm font-medium md:text-base lg:px-12 py-6 lg:py-10 bg-gray-900/50 rounded-lg">
               <div className="flex w-full text-white items-center justify-between">
                 <div className="text-gray-400/50">Reviews</div>
                 <div className="">
@@ -97,10 +120,12 @@ function Page() {
                   ))}
                 </EmblaTestimony>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="w-full hidden md:block">
-            <DescriptionCard />
+            {
+              !loading && <DescriptionCard data={movieInfo} />
+            }
           </div>
         </div>
       </div>
@@ -110,7 +135,7 @@ function Page() {
 
 export default Page
 
-function DescriptionCard() {
+function DescriptionCard({ data }) {
   return (
     <div className="px-6 lg:px-12 space-y-4 py-6 lg:py-10 bg-gray-900/50 rounded-lg">
       <div className="space-y-2">
@@ -118,7 +143,7 @@ function DescriptionCard() {
           <div className="relative text-xl"><CiCalendar /></div>
           <div className="text-sm md:text-base">Released Year</div>
         </div>
-        <div className="text-white font-semibold">2022</div>
+        <div className="text-white font-semibold">{data?.upload_date.split("-")[0]}</div>
       </div>
       <div className="space-y-2 w-full">
         <div className="text-gray-400 flex items-center">
@@ -126,16 +151,17 @@ function DescriptionCard() {
           <div className="text-sm md:text-base">Available Languages</div>
         </div>
         <div className="flex items-center gap-2 w-full flex-wrap">
-          {
+          <div className="text-white bg-gray-950 text-sm rounded-lg px-4 py-2 border border-gray-800 font-semibold">{data?.language}</div>
+          {/* {
             ["English", "Hindi", "Spanish", "French", "German"].map((lang, index) => {
               return (
                 <div key={index} className="text-white bg-gray-950 text-sm rounded-lg px-4 py-2 border border-gray-800 font-semibold">{lang}</div>
               )
             })
-          }
+          } */}
         </div>
       </div>
-      <div className="space-y-2">
+      {/* <div className="space-y-2">
         <div className="text-gray-400 flex items-center">
           <div className="relative"><FaRegStar /></div>
           <div className="text-sm md:text-base">Ratings</div>
@@ -192,7 +218,7 @@ function DescriptionCard() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="space-y-2 w-full">
         <div className="text-gray-400 flex items-center">
           <div className="relative top-[2px] text-xl"><CiGrid41 /></div>
@@ -208,7 +234,7 @@ function DescriptionCard() {
           }
         </div>
       </div>
-      <div className="space-y-2 w-full">
+      {/* <div className="space-y-2 w-full">
         <div className="text-gray-400 flex items-center">
           <div className="text-sm md:text-base">Director</div>
         </div>
@@ -235,7 +261,7 @@ function DescriptionCard() {
             <div className="font-medium text-gray-400/50">From India</div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

@@ -10,6 +10,7 @@ import GenresCard from "./components/organisms/GenresCard";
 import TrendingCard from "./components/organisms/TrendingCard";
 import { useEffect, useState } from "react";
 import { fetchAPI, fetchGenresAPI, fetchSeriesAPI } from "./services/authService"
+import Link from "next/link";
 
 
 export default function Home() {
@@ -41,7 +42,8 @@ export default function Home() {
 
 
   const [genres, setGenres] = useState([])
-  const [newReleases, setNewReleases] = useState([])
+  const [trending, setTrending] = useState([])
+  const [trendingSeries, setTrendingSeries] = useState([])
   const [romance, setRomance] = useState([])
 
 
@@ -60,9 +62,19 @@ export default function Home() {
   }
 
   const fetchNewReleases = async () => {
-    const { status, data } = await fetchSeriesAPI()
+    const { status, data } = await fetchAPI("trending")
     if (status) {
-      setNewReleases(data?.results);
+      setTrending(data?.results);
+    }
+  }
+
+
+  const fetchTrendingSeries = async () => {
+    const { status, data } = await fetchAPI("trending content")
+    if (status) {
+      // console.log(data,"asldklaskfmlkm");
+
+      setTrendingSeries(data?.results);
     }
   }
 
@@ -77,6 +89,7 @@ export default function Home() {
     fetchGenres()
     fetchNewReleases()
     fetchRomance()
+    fetchTrendingSeries()
   }, [])
 
 
@@ -160,16 +173,20 @@ export default function Home() {
               <div className=" sm:text-[20px] text-white"> {movie[0]?.description} </div>
               <div className="flex gap-4">
                 <AppButton>
-                  <div className='flex items-center gap-2'>
-                    <IoPlay />
-                    Play Now
-                  </div>
+                  <Link href={`/movie/${movie[0]?.id}`}>
+                    <div className='flex items-center gap-2'>
+                      <IoPlay />
+                      Play Now
+                    </div>
+                  </Link>
                 </AppButton>
                 <AppButton white>
-                  <div className='flex items-center gap-2'>
-                    <IoPlay />
-                    More Info
-                  </div>
+                  <Link href={`/movie/${movie[0]?.id}`}>
+                    <div className='flex items-center gap-2'>
+                      <IoPlay />
+                      More Info
+                    </div>
+                  </Link>
                 </AppButton>
               </div>
             </div>
@@ -194,9 +211,9 @@ export default function Home() {
       <div className="md:hidden">
         <div className="max-w-[99%] md:max-w-[91%] space-y-16 py-16 ml-auto">
           <EmblaCarousel title="Trending Now" options={{ align: 'start', dragFree: true, loop: false }}>
-            {SLIDES.map((index, i) => (
+            {trending.map((data, i) => (
               <div className="[flex:_0_0_70%] md:[flex:_0_0_20%]" key={i}>
-                <TrendingCard viewsType="views" />
+                <TrendingCard movie={data} viewsType="views" />
               </div>
             ))}
           </EmblaCarousel>
@@ -218,9 +235,9 @@ export default function Home() {
         </div>
         <div className="space-y-16 px-4 py-12">
           <EmblaCarousel title="Trending Series Now" options={{ align: 'start', dragFree: true, loop: false }}>
-            {SLIDES.map((index, i) => (
+            {trendingSeries.map((data, i) => (
               <div className="[flex:_0_0_23.5%]" key={i}>
-                <TrendingCard />
+                <TrendingCard movie={data} />
               </div>
             ))}
           </EmblaCarousel>
