@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import AppButton from '../organisms/AppButton'
 import { AiOutlinePlus } from "react-icons/ai";
 import { TiThumbsUp } from "react-icons/ti";
@@ -6,17 +6,16 @@ import { RxSpeakerLoud } from "react-icons/rx";
 import { IoPlay } from "react-icons/io5";
 import Image from 'next/image';
 
-function AppBanner() {
-
+function AppBanner({movie}) {
     return (
         <>
-            <div className='bannerImg hidden md:block'>
+            <div className={`bg-cover bg-center hidden md:block`} style={{backgroundImage: `url(${movie[3]?.img_poster})`}}>
                 <div className="h-screen flex items-center justify-center bannerGrident">
                     <div className='w-full pt-56'>
                         <div className='max-w-7xl space-y-3 mx-auto text-white text-center'>
-                            <div className='font-normal text-[70px] lg:text-[100px] [font-family:Miltonian_Tattoo] textborder'>THE WISDOM OF ANCESTORS</div>
-                            <div className='text-xl lg:text-3xl leading-[6px] font-bold'>The Wisdom of Ancestors</div>
-                            <div className='text-sm px-3 lg:text-xl max-w-6xl mx-auto'>With the help of remaining allies, the Avengers must assemble once more in order to undo Thanos's actions and undo the chaos to the universe, no matter what consequences may be in store, and no matter who they face... Avenge the fallen.</div>
+                            <div className='font-normal text-[70px] lg:text-[100px] [font-family:Miltonian_Tattoo] max-w-5xl mx-auto textborder'>{movie[3]?.title}</div>
+                            <div className='text-xl lg:text-3xl leading-[6px] font-bold'>{movie[3]?.title}</div>
+                            <div className='text-sm px-3 lg:text-xl max-w-6xl mx-auto'>{movie[3]?.description}</div>
                             <div className='flex items-center justify-center gap-2'>
                                 <AppButton>
                                     <div className='flex items-center gap-2'>
@@ -43,9 +42,16 @@ function AppBanner() {
                     <div className="marquee h-1/4">
                         <div className='gap-3 flex h-full'>
                             {
-                                ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""].map((_, i) => (
+                                movie.map((data, i) => (
                                     <div key={i} className='w-40 h-full bg-gray-900/25 rounded-lg overflow-hidden'>
-                                        {/* <Image src={`https://source.unsplash.com/random/200`} className='h-full w-full' alt='' loading='lazy' width={100} height={100} /> */}
+                                        <Image src={data?.img_poster} className='h-full w-full' alt='' loading='lazy' width={100} height={100} />
+                                    </div>
+                                ))
+                            }
+                            {
+                                movie.map((data, i) => (
+                                    <div key={i} className='w-40 h-full bg-gray-900/25 rounded-lg overflow-hidden'>
+                                        <Image src={data?.img_poster} className='h-full w-full' alt='' loading='lazy' width={100} height={100} />
                                     </div>
                                 ))
                             }
@@ -54,9 +60,16 @@ function AppBanner() {
                     <div className="marquee2 h-1/4">
                         <div className='gap-3 flex h-full'>
                             {
-                                ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""].map((_, i) => (
+                                movie.map((data, i) => (
                                     <div key={i} className='w-40 h-full bg-gray-900/25 rounded-lg overflow-hidden'>
-                                        {/* <Image src={`https://source.unsplash.com/random/200`} className='h-full w-full' alt='' loading='lazy' width={100} height={100} /> */}
+                                        <Image src={data?.img_poster} className='h-full w-full' alt='' loading='lazy' width={100} height={100} />
+                                    </div>
+                                ))
+                            }
+                            {
+                                movie.map((data, i) => (
+                                    <div key={i} className='w-40 h-full bg-gray-900/25 rounded-lg overflow-hidden'>
+                                        <Image src={data?.img_poster} className='h-full w-full' alt='' loading='lazy' width={100} height={100} />
                                     </div>
                                 ))
                             }
@@ -65,9 +78,16 @@ function AppBanner() {
                     <div className="marquee4 h-1/4">
                         <div className='gap-3 flex h-full'>
                             {
-                                ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""].map((_, i) => (
+                                movie.map((data, i) => (
                                     <div key={i} className='w-40 h-full bg-gray-900/25 rounded-lg overflow-hidden'>
-                                        {/* <Image src={`https://source.unsplash.com/random/200`} className='h-full w-full' alt='' loading='lazy' width={100} height={100} /> */}
+                                        <Image src={data?.img_poster} className='h-full w-full' alt='' loading='lazy' width={100} height={100} />
+                                    </div>
+                                ))
+                            }
+                            {
+                                movie.map((data, i) => (
+                                    <div key={i} className='w-40 h-full bg-gray-900/25 rounded-lg overflow-hidden'>
+                                        <Image src={data?.img_poster} className='h-full w-full' alt='' loading='lazy' width={100} height={100} />
                                     </div>
                                 ))
                             }
@@ -76,9 +96,16 @@ function AppBanner() {
                     <div className="marquee3 h-1/4">
                         <div className='gap-3 flex h-full'>
                             {
-                                ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""].map((_, i) => (
+                                movie.map((data, i) => (
                                     <div key={i} className='w-40 h-full bg-gray-900/25 rounded-lg overflow-hidden'>
-                                        {/* <Image src={`https://source.unsplash.com/random/200`} className='h-full w-full' alt='' loading='lazy' width={100} height={100} /> */}
+                                        <Image src={data?.img_poster} className='h-full w-full' alt='' loading='lazy' width={100} height={100} />
+                                    </div>
+                                ))
+                            }
+                            {
+                                movie.map((data, i) => (
+                                    <div key={i} className='w-40 h-full bg-gray-900/25 rounded-lg overflow-hidden'>
+                                        <Image src={data?.img_poster} className='h-full w-full' alt='' loading='lazy' width={100} height={100} />
                                     </div>
                                 ))
                             }

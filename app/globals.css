@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.bannerImg {
-  background-image: url("../public/image/bannerImg.png");
-  background-size: cover;
-}
-
 
 .bannerGrident {
   background: rgb(0, 0, 0);

@@ -9,7 +9,7 @@ import MovieCard from "./components/organisms/MovieCard";
 import GenresCard from "./components/organisms/GenresCard";
 import TrendingCard from "./components/organisms/TrendingCard";
 import { useEffect, useState } from "react";
-import {fetchGenresAPI} from "./services/authService"
+import { fetchAPI, fetchGenresAPI, fetchSeriesAPI } from "./services/authService"
 
 
 export default function Home() {
@@ -17,61 +17,89 @@ export default function Home() {
   const SLIDE_COUNT = 7
   const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
-  const [genres, setGenres] = useState([])
 
-  const fetchGenres = async() => {
-    const {status,data} = await fetchGenresAPI()
+
+
+
+
+
+  const [movie, setMovie] = useState([])
+
+  const fetch = async () => {
+    const { status, data } = await fetchAPI("latest")
+    if (status) {
+      setMovie(data?.results);
+    }
+  }
+
+  useEffect(() => {
+    fetch()
+  }, [])
+
+
+
+
+
+  const [genres, setGenres] = useState([])
+  const [newReleases, setNewReleases] = useState([])
+  const [romance, setRomance] = useState([])
+
+
+
+
+
+
+
+
+
+  const fetchGenres = async () => {
+    const { status, data } = await fetchGenresAPI()
     if (status) {
       setGenres(data?.results);
     }
   }
 
+  const fetchNewReleases = async () => {
+    const { status, data } = await fetchSeriesAPI()
+    if (status) {
+      setNewReleases(data?.results);
+    }
+  }
+
+  const fetchRomance = async () => {
+    const { status, data } = await fetchAPI("romance")
+    if (status) {
+      setRomance(data?.results);
+    }
+  }
+
   useEffect(() => {
     fetchGenres()
+    fetchNewReleases()
+    fetchRomance()
   }, [])
-  
+
 
 
   return (
     <AppLayout active="home">
-      <AppBanner />
+      <AppBanner movie={movie} />
       <div className="space-y-7 hidden md:block">
         <div className="max-w-[91%] space-y-16 py-16 ml-auto">
           <EmblaCarousel title="New Releases" options={{ align: 'start', dragFree: true, loop: true }}>
-            {SLIDES.map((index, i) => (
+            {movie.map((data, i) => (
               <div className="[flex:_0_0_27%]" key={i}>
-                <MovieCard />
+                <MovieCard movie={data} />
               </div>
             ))}
           </EmblaCarousel>
           <EmblaCarousel title="Romance" options={{ align: 'start', dragFree: true, loop: true }}>
-            {SLIDES.map((index, i) => (
+            {romance.map((data, i) => (
               <div className="[flex:_0_0_27%]" key={i}>
-                <MovieCard />
+                <MovieCard movie={data} />
               </div>
             ))}
           </EmblaCarousel>
-        </div>
-        <div className="max-w-7xl mx-auto grid grid-cols-2 gap-8">
-          <div className="space-y-6 pt-5 pb-16">
-            <div className="text-4xl uppercase text-white textborder max-w-sm">THE WISDOM OF ANCESTORS</div>
-            <div className=" text-[20px] text-white">With the help of remaining allies, the Avengers must assemble once more in order to undo Thanos's actions and undo the chaos to the universe, no matter what consequences may be in store, and </div>
-            <div className="flex gap-4">
-              <AppButton>
-                <div className='flex items-center gap-2'>
-                  <IoPlay />
-                  Play Now
-                </div>
-              </AppButton>
-              <AppButton white>
-                <div className='flex items-center gap-2'>
-                  <IoPlay />
-                  More Info
-                </div>
-              </AppButton>
-            </div>
-          </div>
-          <div className="imgBG"></div>
         </div>
       </div>
 
@@ -85,7 +113,7 @@ export default function Home() {
             <EmblaCarousel options={{ align: 'start', dragFree: true, loop: false }}>
               {genres.map((data, i) => (
                 <div className="[flex:_0_0_70%] md:[flex:_0_0_20%]" key={i}>
-                  <GenresCard data={data} />
+                  <GenresCard genres={data} />
                 </div>
               ))}
             </EmblaCarousel>
@@ -107,15 +135,15 @@ export default function Home() {
                 <EmblaCarousel title="New Releases" options={{ align: 'start', dragFree: true, loop: false }}>
                   {genres.map((data, i) => (
                     <div className="[flex:_0_0_70%]" key={i}>
-                      <GenresCard data={data} />
+                      <GenresCard genres={data} />
                     </div>
                   ))}
                 </EmblaCarousel>
               ) : (
                 <EmblaCarousel title="New Releases" options={{ align: 'start', dragFree: true, loop: false }}>
-                  {SLIDES.map((index, i) => (
+                  {movie.map((data, i) => (
                     <div className="[flex:_0_0_70%]" key={i}>
-                      <TrendingCard viewsType="rating" />
+                      <TrendingCard movie={data} viewsType="rating" />
                     </div>
                   ))}
                 </EmblaCarousel>
@@ -124,12 +152,39 @@ export default function Home() {
           </div>
         </div>
       </div>
+      {
+        movie.length > 0 && (
+          <div className="max-w-7xl px-3 mx-auto grid md:grid-cols-2 items-center md:gap-8">
+            <div className="space-y-2 sm:space-y-6 pt-5 pb-16">
+              <div className="text-xl sm:text-4xl uppercase text-white textborder max-w-sm">{movie[0]?.title}</div>
+              <div className=" sm:text-[20px] text-white"> {movie[0]?.description} </div>
+              <div className="flex gap-4">
+                <AppButton>
+                  <div className='flex items-center gap-2'>
+                    <IoPlay />
+                    Play Now
+                  </div>
+                </AppButton>
+                <AppButton white>
+                  <div className='flex items-center gap-2'>
+                    <IoPlay />
+                    More Info
+                  </div>
+                </AppButton>
+              </div>
+            </div>
+            <div className="bg-gray-950">
+              <Image src={movie[0]?.img_poster} className="w-full" alt={movie[0]?.title} width={200} height={400} />
+            </div>
+          </div>
+        )
+      }
 
       <div className="max-w-[100%] md:max-w-[91%] space-y-16 py-16 ml-auto">
-        <EmblaCarousel title="Popular Top 10 In Genres" options={{ align: 'start', dragFree: true, loop: false }}>
+        <EmblaCarousel title="Popular Genres" options={{ align: 'start', dragFree: true, loop: false }}>
           {genres.map((data, i) => (
             <div className="[flex:_0_0_70%] md:[flex:_0_0_20%]" key={i}>
-              <GenresCard data={data} badge />
+              <GenresCard genres={data} />
             </div>
           ))}
         </EmblaCarousel>
@@ -162,13 +217,6 @@ export default function Home() {
           </div>
         </div>
         <div className="space-y-16 px-4 py-12">
-          <EmblaCarousel title="Our Genres" options={{ align: 'start', dragFree: true, loop: false }}>
-            {genres.map((data, i) => (
-              <div className="[flex:_0_0_23.5%]" key={i}>
-                <GenresCard data={data} />
-              </div>
-            ))}
-          </EmblaCarousel>
           <EmblaCarousel title="Trending Series Now" options={{ align: 'start', dragFree: true, loop: false }}>
             {SLIDES.map((index, i) => (
               <div className="[flex:_0_0_23.5%]" key={i}>
@@ -184,9 +232,23 @@ export default function Home() {
             <div className="marquee h-1/2 md:h-1/3">
               <div className='gap-3 flex h-full'>
                 {
-                  ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""].map((_, i) => (
+                  movie.map((movi, i) => (
                     <div key={i} className='w-40 md:w-32 h-full bg-gray-900/25 rounded-lg overflow-hidden'>
-                      {/* <Image src={`https://source.unsplash.com/random/200`} className='h-full w-full' alt='' loading='lazy' width={100} height={100} /> */}
+                      <Image src={movi?.img_poster} className='h-full w-full' alt='' loading='lazy' width={100} height={100} />
+                    </div>
+                  ))
+                }
+                {
+                  movie.map((movi, i) => (
+                    <div key={i} className='w-40 md:w-32 h-full bg-gray-900/25 rounded-lg overflow-hidden'>
+                      <Image src={movi?.img_poster} className='h-full w-full' alt='' loading='lazy' width={100} height={100} />
+                    </div>
+                  ))
+                }
+                {
+                  movie.map((movi, i) => (
+                    <div key={i} className='w-40 md:w-32 h-full bg-gray-900/25 rounded-lg overflow-hidden'>
+                      <Image src={movi?.img_poster} className='h-full w-full' alt='' loading='lazy' width={100} height={100} />
                     </div>
                   ))
                 }
@@ -195,9 +257,23 @@ export default function Home() {
             <div className="marquee2 h-1/2 md:h-1/3">
               <div className='gap-3 flex h-full'>
                 {
-                  ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""].map((_, i) => (
+                  movie.map((movi, i) => (
                     <div key={i} className='w-40 md:w-32 h-full bg-gray-900/25 rounded-lg overflow-hidden'>
-                      {/* <Image src={`https://source.unsplash.com/random/200`} className='h-full w-full' alt='' loading='lazy' width={100} height={100} /> */}
+                      <Image src={movi?.img_poster} className='h-full w-full' alt='' loading='lazy' width={100} height={100} />
+                    </div>
+                  ))
+                }
+                {
+                  movie.map((movi, i) => (
+                    <div key={i} className='w-40 md:w-32 h-full bg-gray-900/25 rounded-lg overflow-hidden'>
+                      <Image src={movi?.img_poster} className='h-full w-full' alt='' loading='lazy' width={100} height={100} />
+                    </div>
+                  ))
+                }
+                {
+                  movie.map((movi, i) => (
+                    <div key={i} className='w-40 md:w-32 h-full bg-gray-900/25 rounded-lg overflow-hidden'>
+                      <Image src={movi?.img_poster} className='h-full w-full' alt='' loading='lazy' width={100} height={100} />
                     </div>
                   ))
                 }
@@ -206,9 +282,23 @@ export default function Home() {
             <div className="marquee4 hidden md:block h-1/3">
               <div className='gap-3 flex h-full'>
                 {
-                  ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""].map((_, i) => (
+                  movie.map((movi, i) => (
                     <div key={i} className='w-40 md:w-32 h-full bg-gray-900/25 rounded-lg overflow-hidden'>
-                      {/* <Image src={`https://source.unsplash.com/random/200`} className='h-full w-full' alt='' loading='lazy' width={100} height={100} /> */}
+                      <Image src={movi?.img_poster} className='h-full w-full' alt='' loading='lazy' width={100} height={100} />
+                    </div>
+                  ))
+                }
+                {
+                  movie.map((movi, i) => (
+                    <div key={i} className='w-40 md:w-32 h-full bg-gray-900/25 rounded-lg overflow-hidden'>
+                      <Image src={movi?.img_poster} className='h-full w-full' alt='' loading='lazy' width={100} height={100} />
+                    </div>
+                  ))
+                }
+                {
+                  movie.map((movi, i) => (
+                    <div key={i} className='w-40 md:w-32 h-full bg-gray-900/25 rounded-lg overflow-hidden'>
+                      <Image src={movi?.img_poster} className='h-full w-full' alt='' loading='lazy' width={100} height={100} />
                     </div>
                   ))
                 }
