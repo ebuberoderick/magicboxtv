@@ -17,8 +17,6 @@ export default function Movies() {
   const [movie, setMovie] = useState([])
   const [genres, setGenres] = useState([])
   const [trending, setTrending] = useState([])
-  const [trendingSeries, setTrendingSeries] = useState([])
-  const [romance, setRomance] = useState([])
 
   const fetch = async () => {
     const { status, data } = await fetchAPI("latest")
@@ -43,25 +41,9 @@ export default function Movies() {
   }
 
 
-  const fetchTrendingSeries = async () => {
-    const { status, data } = await fetchAPI("trending content")
-    if (status) {
-      setTrendingSeries(data?.results);
-    }
-  }
-
-  const fetchRomance = async () => {
-    const { status, data } = await fetchAPI("romance")
-    if (status) {
-      setRomance(data?.results);
-    }
-  }
-
   useEffect(() => {
     fetchGenres()
     fetchNewReleases()
-    fetchRomance()
-    fetchTrendingSeries()
     fetch()
   }, [])
 

@@ -27,14 +27,6 @@ export const fetchAPI = (formdata) =>
     .catch(getErrorResponse);
 export const fetchMovieInfoAPI = (formdata) =>
   apiWithOutAuth
-    .get(`api/content/contents/${formdata}`)
+    .get(`/api/content/contents/${formdata}`)
     .then(getApiResponse)
     .catch(getErrorResponse);
-
-// https://api.magicbox.tv/api/v1/content/contents/?category=tv-series
-// https://api.magicbox.tv/api/v1/content/contents/?genre=animation
-// http://api.magicbox.tv/api/v1/content/genre/
-// http://api.magicbox.tv/api/v1/content/contents/?featured
-// http://api.magicbox.tv/api/v1/content/contents/?featured
-// http://api.magicbox.tv/api/v1/content/contents/?featured2
-// http://api.magicbox.tv/api/v1/content/contents/?latest

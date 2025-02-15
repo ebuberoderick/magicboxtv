@@ -23,6 +23,9 @@ export default function Home() {
 
   const [movie, setMovie] = useState([]);
 
+
+  // http://api.magicbox.tv/api/v1/content/contents/?category=series
+
   const fetch = async () => {
     const { status, data } = await fetchAPI("latest");
     if (status) {
@@ -52,7 +55,7 @@ export default function Home() {
   };
 
   const fetchTrendingSeries = async () => {
-    const { status, data } = await fetchAPI("trending content");
+    const { status, data } = await fetchAPI("category=series");
     if (status) {
       setTrendingSeries(data?.results);
     }
@@ -273,7 +276,7 @@ export default function Home() {
           >
             {trendingSeries.map((data, i) => (
               <div className="[flex:_0_0_23.5%]" key={i}>
-                <TrendingCard movie={data} />
+                <TrendingCard series movie={data} />
               </div>
             ))}
           </EmblaCarousel>

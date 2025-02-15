@@ -143,7 +143,7 @@ function DescriptionCard({ data }) {
           <div className="relative text-xl"><CiCalendar /></div>
           <div className="text-sm md:text-base">Released Year</div>
         </div>
-        <div className="text-white font-semibold">{data?.upload_date.split("-")[0]}</div>
+        <div className="text-white font-semibold">{data?.upload_date && data?.upload_date.split("-")[0]}</div>
       </div>
       <div className="space-y-2 w-full">
         <div className="text-gray-400 flex items-center">

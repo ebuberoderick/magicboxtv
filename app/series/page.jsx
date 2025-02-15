@@ -38,7 +38,7 @@ export default function Series() {
                     </div>
                   </AppButton>
                 </div>
-                <div className="flex items-center justify-center gap-2">
+                {/* <div className="flex items-center justify-center gap-2">
                   <div className='w-10 h-10 text-white text-lg bg-gray-950 rounded-lg cursor-pointer flex items-center justify-center'>
                     <AiOutlinePlus />
                   </div>
@@ -48,7 +48,7 @@ export default function Series() {
                   <div className='w-10 h-10 text-white text-lg bg-gray-950 rounded-lg cursor-pointer flex items-center justify-center'>
                     <RxSpeakerLoud />
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
