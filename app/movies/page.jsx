@@ -4,10 +4,7 @@ import AppLayout from "../components/layouts/appLayout";
 import EmblaCarousel from "../components/molecules/EmblaCarousel";
 import GenresCard from "../components/organisms/GenresCard";
 import TrendingCard from "../components/organisms/TrendingCard";
-import { AiOutlinePlus } from "react-icons/ai";
-import { TiThumbsUp } from "react-icons/ti";
 import { IoPlay } from "react-icons/io5";
-import { RxSpeakerLoud } from "react-icons/rx";
 import AppButton from "../components/organisms/AppButton";
 import { fetchAPI, fetchGenresAPI } from "../services/authService";
 import Link from "next/link";
@@ -17,17 +14,11 @@ export default function Movies() {
   const SLIDE_COUNT = 7
   const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
-
-
   const [movie, setMovie] = useState([])
   const [genres, setGenres] = useState([])
   const [trending, setTrending] = useState([])
   const [trendingSeries, setTrendingSeries] = useState([])
   const [romance, setRomance] = useState([])
-
-
-
-
 
   const fetch = async () => {
     const { status, data } = await fetchAPI("latest")
@@ -55,8 +46,6 @@ export default function Movies() {
   const fetchTrendingSeries = async () => {
     const { status, data } = await fetchAPI("trending content")
     if (status) {
-      // console.log(data,"asldklaskfmlkm");
-
       setTrendingSeries(data?.results);
     }
   }
@@ -75,10 +64,6 @@ export default function Movies() {
     fetchTrendingSeries()
     fetch()
   }, [])
-
-
-
-
 
   return (
     <AppLayout active="movies">

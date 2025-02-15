@@ -1,68 +1,64 @@
 import axios from "axios";
-// import Cookies from "js-cookie";
 import ls from "localstorage-slim";
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://api.magicbox.tv/api/v1/";
-// export const TOKEN = `Bearer ${Cookies.get("magicboxtv")}`
-export const TOKEN = `Bearer ${ls.get("magicboxtv", { decrypt: true })}`
 
-
-const timeoutConfig = {
-  timeout: 30000,
-  timeoutErrorMessage: "Server taking too long to respond. Try again.",
-};
+export const TOKEN = `Bearer ${ls.get("magicboxtv", { decrypt: true })}`;
 
 export const apiWithOutAuth = axios.create({
-  baseURL: API_BASE_URL,
-  withCredentials: true,
   headers: {
-    'Cache-Control': 'no-cache',
-    'Pragma': 'no-cache',
+    "Cache-Control": "no-cache",
+    Pragma: "no-cache",
     Accept: "application/json",
     "Content-Type": "application/json",
   },
-  ...timeoutConfig,
 });
 
 export const apiWithAuth = axios.create({
-  baseURL: API_BASE_URL,
-  withCredentials: true,
   headers: {
-    'Cache-Control': 'no-cache',
-    'Pragma': 'no-cache',
+    "Cache-Control": "no-cache",
+    Pragma: "no-cache",
     Accept: "application/json",
     "Content-Type": "application/json",
-    Authorization: TOKEN 
+    Authorization: TOKEN,
   },
-  ...timeoutConfig,
 });
 
-
-
-apiWithOutAuth.interceptors.request.use(async(config) => {
-  const msisdn = ls.get("magicboxtv", { decrypt: true })
-  if (msisdn) {
-    config.params = { ...config.params, msisdn };
+apiWithOutAuth.interceptors.request.use(
+  async (config) => {
+    const msisdn = ls.get("magicboxtv", { decrypt: true });
+    if (msisdn) {
+      config.params = { ...config.params, msisdn };
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
   }
-  return config;
-}, (error) => {
-  return Promise.reject(error);
-});
+);
 
-
-apiWithAuth.interceptors.request.use(async(config) => {
-  const msisdn = ls.get("magicboxtv", { decrypt: true })
-  if (msisdn) {
-    config.params = { ...config.params, msisdn };
+apiWithAuth.interceptors.request.use(
+  async (config) => {
+    const msisdn = ls.get("magicboxtv", { decrypt: true });
+    if (msisdn) {
+      config.params = { ...config.params, msisdn };
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
   }
-  return config;
-}, (error) => {
-  return Promise.reject(error);
-});
+);
 
+export const http = async ({
+  requireToken = false,
+  ...config
+}) => {
+  const axiosInstance = requireToken ? apiWithAuth : apiWithOutAuth;
+  const response = await axiosInstance(config);
 
+  return response;
+};
 
 export const getApiResponse = (data) => {
-  // errors
   return {
     status: true,
     data: data.data,
@@ -70,9 +66,9 @@ export const getApiResponse = (data) => {
 };
 
 export const getErrorResponse = (error) => {
-  if (error.response.status === 401) {
-    Cookies.remove('magicboxtv')
-    window !== "undefined" && window.location.reload()
+  if (error?.response?.status === 401) {
+    Cookies.remove("magicboxtv");
+    window !== "undefined" && window.location.reload();
   }
 
   return {
