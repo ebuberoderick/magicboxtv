@@ -6,8 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 function TrendingCard({ movie, viewsType, series }) {
-  console.log(movie);
-
   return (
     <div>
       <Link href={series ? `/series/${movie?.id}` : `/movies/${movie?.id}`}>
