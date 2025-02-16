@@ -6,14 +6,14 @@ const nextConfig = {
       "https://",
     ],
   },
-  async rewrites() {
-    return [
-      {
-        source: "/campaign/mobplus",
-        destination: "/api/campaign/mobplus",
-      },
-    ];
-  },
+  //   async rewrites() {
+  //     return [
+  //       {
+  //         source: "/campaign/mobplus",
+  //         destination: "/api/campaign/mobplus",
+  //       },
+  //     ];
+  //   },
 };
 
 export default nextConfig;

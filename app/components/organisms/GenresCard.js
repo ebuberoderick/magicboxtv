@@ -1,6 +1,7 @@
+"use client"
 import React, { useEffect, useState } from 'react'
 import { IoArrowForward } from "react-icons/io5";
-import { fetchGenresMovieAPI } from '../../services/authService';
+import { fetchGenresMovieAPI } from '../../../services/authService';
 import Image from 'next/image';
 
 function GenresCard({ badge, genres }) {

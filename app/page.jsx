@@ -1,80 +1,31 @@
-"use client";
 import Image from "next/image";
 import AppLayout from "./components/layouts/appLayout";
 import AppBanner from "./components/molecules/AppBanner";
 import AppButton from "./components/organisms/AppButton";
 import { IoPlay } from "react-icons/io5";
 import EmblaCarousel from "./components/molecules/EmblaCarousel";
+import HomeCarousel from "./components/organisms/HomeCarousel";
 import MovieCard from "./components/organisms/MovieCard";
 import GenresCard from "./components/organisms/GenresCard";
 import TrendingCard from "./components/organisms/TrendingCard";
-import { useEffect, useState } from "react";
-import {
-  fetchAPI,
-  fetchGenresAPI,
-  fetchSeriesAPI,
-} from "./services/authService";
+import { fetchAPI, fetchGenresAPI } from "../services/authService";
 import Link from "next/link";
 
-export default function Home() {
-  const [activeTab, setActiveTab] = useState("movies");
-  const SLIDE_COUNT = 7;
-  const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
+const SLIDE_COUNT = 7;
+const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
 
-  const [movie, setMovie] = useState([]);
+export default async function Home() {
+  const { data: latestData } = await fetchAPI("latest");
+  const { data: genresData } = await fetchGenresAPI();
+  const { data: trendingData } = await fetchAPI("trending");
+  const { data: trendingSeriesData } = await fetchAPI("category=series");
+  const { data: romanceData } = await fetchAPI("romance");
 
-
-  // http://api.magicbox.tv/api/v1/content/contents/?category=series
-
-  const fetch = async () => {
-    const { status, data } = await fetchAPI("latest");
-    if (status) {
-      setMovie(data?.results);
-    }
-  };
-
-  const [genres, setGenres] = useState([]);
-  const [trending, setTrending] = useState([]);
-  const [trendingSeries, setTrendingSeries] = useState([]);
-  const [romance, setRomance] = useState([]);
-
-  const fetchGenres = async () => {
-    const genres = await fetchGenresAPI();
-    console.log({ genres });
-    const { status, data } = genres;
-    if (status) {
-      setGenres(data?.results);
-    }
-  };
-
-  const fetchNewReleases = async () => {
-    const { status, data } = await fetchAPI("trending");
-    if (status) {
-      setTrending(data?.results);
-    }
-  };
-
-  const fetchTrendingSeries = async () => {
-    const { status, data } = await fetchAPI("category=series");
-    if (status) {
-      setTrendingSeries(data?.results);
-    }
-  };
-
-  const fetchRomance = async () => {
-    const { status, data } = await fetchAPI("romance");
-    if (status) {
-      setRomance(data?.results);
-    }
-  };
-
-  useEffect(() => {
-    fetch()
-    fetchGenres();
-    fetchNewReleases()
-    fetchRomance()
-    fetchTrendingSeries()
-  }, []);
+  const movie = latestData?.results || [];
+  const genres = genresData?.results || [];
+  const trending = trendingData?.results || [];
+  const trendingSeries = trendingSeriesData?.results || [];
+  const romance = romanceData?.results || [];
 
   return (
     <AppLayout active="home">
@@ -127,71 +78,17 @@ export default function Home() {
             </EmblaCarousel>
           </div>
         </div>
-
-        <div className="max-w-sm mx-auto px-4">
-          <div className="border text-center relative border-gray-800 grid grid-cols-2 p-2 rounded-xl bg-black/60">
-            <div
-              className={`absolute z-0 w-1/2 h-[85%] transition-all duration-300 rounded-md top-1 right-1 bg-gray-900 ${
-                activeTab === "movies" ? "left-1" : "left-[49%]"
-              }`}
-            />
-            <div
-              onClick={() => setActiveTab("movies")}
-              className={`relative cursor-pointer py-2 z-20 ${
-                activeTab === "movies" ? "text-white" : "text-gray-500"
-              }`}
-            >
-              Movies
-            </div>
-            <div
-              onClick={() => setActiveTab("shows")}
-              className={`relative cursor-pointer py-2 z-20 ${
-                activeTab === "shows" ? "text-white" : "text-gray-500"
-              }`}
-            >
-              Shows
-            </div>
-          </div>
-        </div>
-
-        <div className="space-y-6">
-          <div className="">
-            {activeTab === "movies" ? (
-              <EmblaCarousel
-                title="New Releases"
-                options={{ align: "start", dragFree: true, loop: false }}
-              >
-                {genres.map((data, i) => (
-                  <div className="[flex:_0_0_70%]" key={i}>
-                    <GenresCard genres={data} />
-                  </div>
-                ))}
-              </EmblaCarousel>
-            ) : (
-              <EmblaCarousel
-                title="New Releases"
-                options={{ align: "start", dragFree: true, loop: false }}
-              >
-                {movie.map((data, i) => (
-                  <div className="[flex:_0_0_70%]" key={i}>
-                    <TrendingCard movie={data} viewsType="rating" />
-                  </div>
-                ))}
-              </EmblaCarousel>
-            )}
-          </div>
-        </div>
+        <HomeCarousel genres={genres} movies={movie} />
       </div>
       {movie.length > 0 && (
         <div className="max-w-7xl px-3 mx-auto grid md:grid-cols-2 items-center md:gap-8">
           <div className="space-y-2 sm:space-y-6 pt-5 pb-16">
-            <div className="text-xl sm:text-4xl uppercase text-white textborder max-w-sm">
+            <h4 className="text-xl sm:text-4xl uppercase text-white textborder max-w-sm">
               {movie[0]?.title}
-            </div>
-            <div className=" sm:text-[20px] text-white">
-              {" "}
-              {movie[0]?.description}{" "}
-            </div>
+            </h4>
+            <p className=" sm:text-[20px] text-white">
+              {movie[0]?.description}
+            </p>
             <div className="flex gap-4">
               <AppButton>
                 <Link href={`/movie/${movie[0]?.id}`}>
@@ -213,9 +110,9 @@ export default function Home() {
           </div>
           <div className="bg-gray-950">
             <Image
-              src={movie[0]?.img_poster ?? ''}
+              src={movie[0]?.img_poster ?? ""}
               className="w-full"
-              alt={movie[0]?.title ?? ''}
+              alt={movie[0]?.title ?? ""}
               width={200}
               height={400}
             />
@@ -293,7 +190,7 @@ export default function Home() {
                     className="w-40 md:w-32 h-full bg-gray-900/25 rounded-lg overflow-hidden"
                   >
                     <Image
-                      src={movi?.img_poster ?? ''}
+                      src={movi?.img_poster ?? ""}
                       className="h-full w-full"
                       alt=""
                       loading="lazy"
@@ -308,7 +205,7 @@ export default function Home() {
                     className="w-40 md:w-32 h-full bg-gray-900/25 rounded-lg overflow-hidden"
                   >
                     <Image
-                      src={movi?.img_poster ?? ''}
+                      src={movi?.img_poster ?? ""}
                       className="h-full w-full"
                       alt=""
                       loading="lazy"
@@ -323,7 +220,7 @@ export default function Home() {
                     className="w-40 md:w-32 h-full bg-gray-900/25 rounded-lg overflow-hidden"
                   >
                     <Image
-                      src={movi?.img_poster ?? ''}
+                      src={movi?.img_poster ?? ""}
                       className="h-full w-full"
                       alt=""
                       loading="lazy"
@@ -342,7 +239,7 @@ export default function Home() {
                     className="w-40 md:w-32 h-full bg-gray-900/25 rounded-lg overflow-hidden"
                   >
                     <Image
-                      src={movi?.img_poster ?? ''}
+                      src={movi?.img_poster ?? ""}
                       className="h-full w-full"
                       alt=""
                       loading="lazy"
@@ -357,7 +254,7 @@ export default function Home() {
                     className="w-40 md:w-32 h-full bg-gray-900/25 rounded-lg overflow-hidden"
                   >
                     <Image
-                      src={movi?.img_poster ?? ''}
+                      src={movi?.img_poster ?? ""}
                       className="h-full w-full"
                       alt=""
                       loading="lazy"
@@ -372,7 +269,7 @@ export default function Home() {
                     className="w-40 md:w-32 h-full bg-gray-900/25 rounded-lg overflow-hidden"
                   >
                     <Image
-                      src={movi?.img_poster ?? ''}
+                      src={movi?.img_poster ?? ""}
                       className="h-full w-full"
                       alt=""
                       loading="lazy"
@@ -391,7 +288,7 @@ export default function Home() {
                     className="w-40 md:w-32 h-full bg-gray-900/25 rounded-lg overflow-hidden"
                   >
                     <Image
-                      src={movi?.img_poster ?? ''}
+                      src={movi?.img_poster ?? ""}
                       className="h-full w-full"
                       alt=""
                       loading="lazy"
@@ -406,7 +303,7 @@ export default function Home() {
                     className="w-40 md:w-32 h-full bg-gray-900/25 rounded-lg overflow-hidden"
                   >
                     <Image
-                      src={movi?.img_poster ?? ''}
+                      src={movi?.img_poster ?? ""}
                       className="h-full w-full"
                       alt=""
                       loading="lazy"
@@ -421,7 +318,7 @@ export default function Home() {
                     className="w-40 md:w-32 h-full bg-gray-900/25 rounded-lg overflow-hidden"
                   >
                     <Image
-                      src={movi?.img_poster ?? ''}
+                      src={movi?.img_poster ?? ""}
                       className="h-full w-full"
                       alt=""
                       loading="lazy"

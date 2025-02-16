@@ -1,5 +1,5 @@
 import { headers } from "next/headers";
-import { http } from "../../services/httpService";
+import { http } from "../../../services/httpService";
 
 export const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL || "https://api.magicbox.tv/api/v1/";
@@ -21,9 +21,7 @@ export async function GET(request, { params }) {
 
   if (msisdn) {
     config.headers = {
-      // ...req.headers,
       Msisdn: msisdn,
-      //   Authorization: `Bearer ${session.accessToken}`,
     };
   }
 
@@ -32,9 +30,7 @@ export async function GET(request, { params }) {
 
     return Response.json(response.data, { status: response.status });
   } catch (error) {
-    const err = error;
-    return Response.json(err?.response?.data, {
-      status: err?.response?.status ?? 500,
-    });
+    const err = error?.response;
+    return Response.json(err?.data, { status: err?.status ?? 500 });
   }
 }

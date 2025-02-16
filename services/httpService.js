@@ -1,9 +1,11 @@
 import axios from "axios";
 import ls from "localstorage-slim";
+import { redirect } from "next/navigation";
 
 export const TOKEN = `Bearer ${ls.get("magicboxtv", { decrypt: true })}`;
 
 export const apiWithOutAuth = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_HOST_URL || "http://localhost:3000",
   headers: {
     "Cache-Control": "no-cache",
     Pragma: "no-cache",
@@ -13,6 +15,7 @@ export const apiWithOutAuth = axios.create({
 });
 
 export const apiWithAuth = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_HOST_URL || "http://localhost:3000",
   headers: {
     "Cache-Control": "no-cache",
     Pragma: "no-cache",
@@ -48,12 +51,11 @@ apiWithAuth.interceptors.request.use(
   }
 );
 
-export const http = async ({
-  requireToken = false,
-  ...config
-}) => {
+export const http = async ({ requireToken = false, ...config }) => {
   const axiosInstance = requireToken ? apiWithAuth : apiWithOutAuth;
   const response = await axiosInstance(config);
+
+  console.log(`resp ${response}`);
 
   return response;
 };
@@ -69,6 +71,9 @@ export const getErrorResponse = (error) => {
   if (error?.response?.status === 401) {
     Cookies.remove("magicboxtv");
     window !== "undefined" && window.location.reload();
+  }
+  if (error?.response?.status === 403) {
+    redirect(error?.response?.data?.redirect_url);
   }
 
   return {

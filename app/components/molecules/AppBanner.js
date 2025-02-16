@@ -1,8 +1,4 @@
-import React, { useEffect, useState } from 'react'
 import AppButton from '../organisms/AppButton'
-import { AiOutlinePlus } from "react-icons/ai";
-import { TiThumbsUp } from "react-icons/ti";
-import { RxSpeakerLoud } from "react-icons/rx";
 import { IoPlay } from "react-icons/io5";
 import Image from 'next/image';
 import Link from 'next/link';

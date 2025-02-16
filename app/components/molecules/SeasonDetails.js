@@ -1,3 +1,4 @@
+"use client"
 import Image from 'next/image';
 import React, { useState } from 'react'
 import { IoArrowDown, IoTime } from "react-icons/io5";
@@ -28,7 +29,7 @@ function SeasonDetails({ data }) {
                             <div className='flex w-full sm:w-auto md:w-full lg:w-auto items-center gap-5'>
                                 <div className='sm:order-1 md:order-none lg:order-1 w-full flex-grow'>
                                     <div className='sm:w-32 md:w-auto lg:w-44 w-full h-28 bg-gray-700 relative overflow-hidden rounded-lg'>
-                                        <Image src={index?.img_detail_poster ?? index?.img_detail_poster} width={100} height={100} alt={index?.title} className='w-full h-full object-cover rounded-lg' />
+                                        <Image src={index?.img_banner ?? index?.img_banner} width={100} height={100} alt={index?.title} className='w-full h-full object-cover rounded-lg' />
                                         <div className='absolute cursor-pointer top-0 left-0 flex items-center justify-center w-full h-full bg-black/50 rounded-lg'>
                                             <div className='w-12 h-12 rounded-full text-white text-4xl flex items-center justify-center bg-black/50'><HiOutlinePlay /></div>
                                         </div>
