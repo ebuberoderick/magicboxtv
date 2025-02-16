@@ -160,7 +160,9 @@ function DescriptionCard({ data }) {
 
 async function Page({ params }) {
   const { movie } = await params;
-  const { data: movieInfo = {} } = await fetchMovieInfoAPI(movie);
+  const { data, status } = await fetchMovieInfoAPI(movie);
+
+  const movieInfo = status ? data : {};
 
   return (
     <AppLayout active="movies">

@@ -1,5 +1,6 @@
 import axios from "axios";
 import ls from "localstorage-slim";
+import { redirect } from 'next/navigation'
 
 export const TOKEN = `Bearer ${ls.get("magicboxtv", { decrypt: true })}`;
 
@@ -65,10 +66,12 @@ export const getApiResponse = (data) => {
 };
 
 export const getErrorResponse = (error) => {
-  console.log(error);
   if (error?.response?.status === 401) {
     Cookies.remove("magicboxtv");
     window !== "undefined" && window.location.reload();
+  }
+  if (error?.response?.status === 403) {
+    redirect(error?.response?.data?.redirect_url);
   }
 
   return {

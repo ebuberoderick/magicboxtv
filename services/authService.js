@@ -30,9 +30,8 @@ export const fetchAPI = cache((formdata) =>
     .then(getApiResponse)
     .catch(getErrorResponse)
 );
-export const fetchMovieInfoAPI = cache((formdata) =>
+export const fetchMovieInfoAPI = (formdata) =>
   apiWithOutAuth
     .get(`/api/content/contents/${formdata}`)
     .then(getApiResponse)
-    .catch(getErrorResponse)
-);
+    .catch(getErrorResponse);
