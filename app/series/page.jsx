@@ -36,7 +36,7 @@ export default function Series() {
   return (
     <AppLayout active="series">
       <div className="h-screen bg-gray-950 pt-24 pb-10 px-4">
-        <div className="overflow-hidden h-full max-w-7xl mx-auto rounded-lg seriesbannerimgBG">
+        <div className="overflow-hidden h-full max-w-7xl mx-auto rounded-lg bg-cover bg-center" style={{ backgroundImage: `url(${trendingSeries[0]?.img_banner ?? trendingSeries[0]?.img_banner})` }}>
           <div className="relative h-full p-6 flex items-end bg-gradient-to-t from-gray-950 to-[#00000000]">
             <div className="p-5 space-y-5 w-full text-center">
               <div className="space-y-1">
