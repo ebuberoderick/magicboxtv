@@ -1,4 +1,4 @@
-import { http } from "../../../../services/httpService";
+import { http, apiWithOutAuth } from "../../../../services/httpService";
 
 export async function GET(request) {
   const searchParams = request.nextUrl.searchParams;
@@ -31,7 +31,11 @@ export async function GET(request) {
     data: payload,
   };
 
-  const response = await http(config);
+  const response = await apiWithOutAuth
+    .post("/api/content/genre/")
+    .then((data) => console.log(data))
+    .catch((err) => console.log(err));
+  //   const response = await http(config);
 
   return Response.json(response.data, { status: response.status });
 }
