@@ -1,3 +1,4 @@
+"use client"
 import Image from 'next/image';
 import React, { useState } from 'react'
 import { IoArrowDown, IoTime } from "react-icons/io5";
