@@ -7,7 +7,7 @@ export const API_BASE_URL =
 export async function GET(request, { params }) {
   const slugs = (await params).url;
   const url = slugs.join("/");
-  const searchParams = request.nextUrl.searchParams
+  const searchParams = request.nextUrl.searchParams;
 
   const headersList = await headers();
   const msisdn = headersList.get("msisdn");
@@ -30,9 +30,11 @@ export async function GET(request, { params }) {
   try {
     const response = await http(config);
 
-    return Response.json(response.data, { status: response.status});
+    return Response.json(response.data, { status: response.status });
   } catch (error) {
     const err = error;
-    return Response.json(err?.response?.data, { status: err?.response?.status ?? 500});
+    return Response.json(err?.response?.data, {
+      status: err?.response?.status ?? 500,
+    });
   }
 }
