@@ -9,7 +9,7 @@ import { CiCalendar, CiGrid41 } from "react-icons/ci";
 import { HiOutlineTranslate } from "react-icons/hi";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import SeasonDetails from "../components/molecules/SeasonDetails";
-import { fetchAPI } from "../services/authService";
+import { fetchAPI } from "../../services/authService";
 import { useEffect, useState } from "react";
 import EmblaCarousel from "../components/molecules/EmblaCarousel";
 import TrendingCard from "../components/organisms/TrendingCard";

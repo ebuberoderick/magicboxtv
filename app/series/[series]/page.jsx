@@ -9,7 +9,7 @@ import { CiCalendar, CiGrid41 } from "react-icons/ci";
 import { HiOutlineTranslate } from "react-icons/hi";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import SeasonDetails from "../../components/molecules/SeasonDetails";
-import { fetchMovieInfoAPI } from "../../services/authService";
+import { fetchMovieInfoAPI } from "../../../services/authService";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -19,13 +19,14 @@ export default function Series() {
   const { series } = useParams();
   const [movieInfo, setMovieInfo] = useState({})
   const [loading, setLoading] = useState(true)
+  const [activeEpisode, setActiveEpisode] = useState({})
 
   const fetchMovieData = async () => {
     const { status, data } = await fetchMovieInfoAPI(series)
     console.log(data);
     if (status) {
       setMovieInfo(data);
-      console.log(data);
+      setActiveEpisode(data?.episodes[0])
     }
     setLoading(false)
   }
@@ -38,12 +39,12 @@ export default function Series() {
   return (
     <AppLayout active="series">
       <div className="h-screen bg-gray-950 pt-24 pb-10 px-4">
-        <div className="overflow-hidden h-full max-w-7xl mx-auto rounded-lg bg-cover bg-center" style={{ backgroundImage: `url(${movieInfo?.img_banner ?? movieInfo?.img_banner})` }}>
+        <div className="overflow-hidden h-full max-w-7xl mx-auto rounded-lg bg-cover bg-center" style={{ backgroundImage: `url(${activeEpisode?.img_banner ?? activeEpisode?.img_banner})` }}>
           <div className="relative h-full p-6 flex items-end bg-gradient-to-t from-gray-950 to-[#00000000]">
             <div className="p-5 space-y-5 w-full text-center">
               <div className="space-y-1">
-                <div className="text-white font-bold text-3xl">{movieInfo?.title}</div>
-                <div className="text-gray-400 max-w-3xl hidden md:block text-sm mx-auto">{movieInfo?.description}</div>
+                <div className="text-white font-bold text-3xl">{activeEpisode?.title}</div>
+                <div className="text-gray-400 max-w-3xl hidden md:block text-sm mx-auto">{activeEpisode?.description}</div>
               </div>
               <div className="md:flex items-center justify-center gap-3">
                 <div className="md:hidden">
@@ -84,7 +85,7 @@ export default function Series() {
             <div className="px-6 space-y-8 lg:px-12 py-6 lg:py-10 bg-gray-900/50 rounded-lg">
               <div className="font-semibold text-white text-lg md:text-xl">Episodes</div>
               <div className="space-y-4">
-                <SeasonDetails data={movieInfo?.episodes} />
+                <SeasonDetails setActiveEpisode={(data) => setActiveEpisode(data)} activeEpisode={activeEpisode} data={movieInfo?.episodes} />
               </div>
             </div>
             <div className="px-6 text-sm font-medium md:text-base lg:px-12 py-6 lg:py-10 bg-gray-900/50 rounded-lg">
