@@ -7,7 +7,6 @@ function VideoPlayer({ movieInfo }) {
     const [playing, setPlaying] = useState(false);
     const videoRef = useRef(null);
 
-
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {
@@ -43,9 +42,9 @@ function VideoPlayer({ movieInfo }) {
 
     return (
         <div>
-            <div className={`${!playing && "h-screen"} bg-gray-950 pt-24 pb-10 px-4`}>
+            <div className={`${!playing && "h-screen"} h-screen bg-gray-950 pt-24 pb-10 px-4`}>
 
-                <div className={`${!playing && "hidden"}`}>
+                <div className={`${!playing && "hidden"} h-full`}>
                     <video ref={videoRef} autoPlay={playing} onPause={() => setPlaying(false)} controls className="w-full h-full object-cover" src={movieInfo?.file_mp4}></video>
                 </div>
                 <div
