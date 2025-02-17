@@ -15,11 +15,11 @@ const SLIDE_COUNT = 7;
 const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
 
 export default async function Home() {
-  const { data: latestData } = await fetchAPI("latest");
+  const { data: latestData } = await fetchAPI("latest=true");
   const { data: genresData } = await fetchGenresAPI();
-  const { data: trendingData } = await fetchAPI("trending");
+  const { data: trendingData } = await fetchAPI("trending=true");
   const { data: trendingSeriesData } = await fetchAPI("category=series");
-  const { data: romanceData } = await fetchAPI("romance");
+  const { data: romanceData } = await fetchAPI("romance=true");
 
   const movie = latestData?.results || [];
   const genres = genresData?.results || [];

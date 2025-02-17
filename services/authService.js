@@ -35,3 +35,15 @@ export const fetchMovieInfoAPI = (formdata) =>
     .get(`/api/content/contents/${formdata}`)
     .then(getApiResponse)
     .catch(getErrorResponse);
+
+export const postCampaign = async (url, payload) => {
+  if (!payload.clickid)
+    return { status: false, data: { message: "Click ID not found" } };
+  try {
+    const res = await apiWithOutAuth.post(url, payload);
+    return getApiResponse(res);
+  } catch (error) {
+    console.log(error?.response?.data, "lol");
+    return getErrorResponse(error);
+  }
+};
