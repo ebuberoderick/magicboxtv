@@ -1,0 +1,19 @@
+volumes:
+  node_modules:
+    name: magicbox_assets_node_modules
+
+services:
+  assets:
+    image: magicbox-assets
+    build:
+      context: .
+      dockerfile: next.Dockerfile
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./:/code/assets
+      - node_modules:/code/assets/node_modules
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env

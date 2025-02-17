@@ -1,13 +1,13 @@
 import { headers } from "next/headers";
 import { http } from "../../../services/httpService";
 
-export const API_BASE_URL =
+const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL || "https://api.magicbox.tv/api/v1/";
 
 export async function GET(request, { params }) {
   const slugs = (await params).url;
   const url = slugs.join("/");
-  const searchParams = request.nextUrl.searchParams
+  const searchParams = request.nextUrl.searchParams;
 
   const headersList = await headers();
   const msisdn = headersList.get("msisdn");
@@ -28,9 +28,9 @@ export async function GET(request, { params }) {
   try {
     const response = await http(config);
 
-    return Response.json(response.data, { status: response.status});
+    return Response.json(response.data, { status: response.status });
   } catch (error) {
     const err = error?.response;
-    return Response.json(err?.data, { status: err?.status ?? 500});
+    return Response.json(err?.data, { status: err?.status ?? 500 });
   }
 }
