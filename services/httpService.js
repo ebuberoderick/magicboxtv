@@ -1,6 +1,6 @@
 import axios from "axios";
 import ls from "localstorage-slim";
-import { redirect } from 'next/navigation'
+import { redirect } from "next/navigation";
 
 export const TOKEN = `Bearer ${ls.get("magicboxtv", { decrypt: true })}`;
 
@@ -54,6 +54,8 @@ apiWithAuth.interceptors.request.use(
 export const http = async ({ requireToken = false, ...config }) => {
   const axiosInstance = requireToken ? apiWithAuth : apiWithOutAuth;
   const response = await axiosInstance(config);
+
+  console.log(`resp ${response}`);
 
   return response;
 };
