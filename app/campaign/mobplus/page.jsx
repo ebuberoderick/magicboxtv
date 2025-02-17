@@ -5,6 +5,8 @@ import { redirect } from "next/navigation";
 const MobplusPage = async ({ searchParams: searchParamsPromise }) => {
   const { clickid, partner, telco, pubid } = await searchParamsPromise;
 
+  console.log(`processing for ${clickid}`);
+
   const { data, status } = await postCampaign("/api/ums/provider/mobplus", {
     clickid,
     partner,

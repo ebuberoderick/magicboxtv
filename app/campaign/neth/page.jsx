@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 const TCPage = async ({ searchParams: searchParamsPromise }) => {
   const { clickid, partner, telco, pubid } = await searchParamsPromise;
 
-  const { data, status } = await postCampaign("/api/ums/provider/neth", {
+  const { data, status } = await postCampaign("/api/v1/ums/provider/neth", {
     clickid,
     partner,
     telco,
