@@ -1,11 +1,45 @@
 "use client"
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import AppButton from './AppButton';
 import { IoPlay } from "react-icons/io5";
 
 function VideoPlayer({ movieInfo }) {
     const [playing, setPlaying] = useState(false);
     const videoRef = useRef(null);
+
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        if (!playing) {
+                            setPlaying(true);
+                            videoRef.current.play();
+                        }
+                    } else {
+                        if (playing) {
+                            setPlaying(false);
+                            videoRef.current.pause();
+                        }
+                    }
+                });
+            },
+            {
+                threshold: 0.7, 
+            }
+        );
+
+        if (videoRef.current) {
+            observer.observe(videoRef.current);
+        }
+        return () => {
+            if (videoRef.current) {
+                observer.unobserve(videoRef.current);
+            }
+        };
+    }, [playing]);
+
 
     return (
         <div>
