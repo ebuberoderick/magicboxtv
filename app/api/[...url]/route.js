@@ -8,6 +8,7 @@ export async function GET(request, { params }) {
   const slugs = (await params).url;
   const url = slugs.join("/");
   const searchParams = request.nextUrl.searchParams;
+  const urlParams = Object.fromEntries(searchParams.entries());
 
   const headersList = await headers();
   const msisdn = headersList.get("msisdn");
@@ -16,7 +17,7 @@ export async function GET(request, { params }) {
     baseURL: API_BASE_URL,
     method: "GET",
     url,
-    params: searchParams,
+    params: urlParams,
   };
 
   if (msisdn) {
@@ -39,6 +40,8 @@ export async function POST(request, { params }) {
   const slugs = (await params).url;
   const url = slugs.join("/");
   const body = await request.json();
+  const searchParams = request.nextUrl.searchParams;
+  const urlParams = Object.fromEntries(searchParams.entries());
 
   const headersList = await headers();
   const msisdn = headersList.get("msisdn");
@@ -48,6 +51,7 @@ export async function POST(request, { params }) {
     method: "POST",
     url,
     data: body,
+    params: urlParams,
   };
 
   if (msisdn) {
