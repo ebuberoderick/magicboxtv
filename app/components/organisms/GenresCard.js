@@ -13,8 +13,6 @@ function GenresCard({ badge, genres }) {
         if (status) {
             setGenresMovies(data?.results);
         }
-        // console.log(data);
-
     }
 
     useEffect(() => {
