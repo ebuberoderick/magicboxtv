@@ -12,6 +12,7 @@ import SeasonDetails from "../../components/molecules/SeasonDetails";
 import { fetchMovieInfoAPI } from "../../../services/authService";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import VideoPlayer from "../../components/organisms/VideoPlayer";
 
 export default function Series() {
 
@@ -38,7 +39,13 @@ export default function Series() {
 
   return (
     <AppLayout active="series">
-      <div className="h-screen bg-gray-950 pt-24 pb-10 px-4">
+
+
+      <VideoPlayer movieInfo={activeEpisode} />
+
+
+
+      {/* <div className="h-screen bg-gray-950 pt-24 pb-10 px-4">
         <div className="overflow-hidden h-full max-w-7xl mx-auto rounded-lg bg-cover bg-center" style={{ backgroundImage: `url(${activeEpisode?.img_banner ?? activeEpisode?.img_banner})` }}>
           <div className="relative h-full p-6 flex items-end bg-gradient-to-t from-gray-950 to-[#00000000]">
             <div className="p-5 space-y-5 w-full text-center">
@@ -63,7 +70,7 @@ export default function Series() {
                     </div>
                   </AppButton>
                 </div>
-                {/* <div className="flex items-center justify-center gap-2">
+                <div className="flex items-center justify-center gap-2">
                   <div className='w-10 h-10 text-white text-lg bg-gray-950 rounded-lg cursor-pointer flex items-center justify-center'>
                     <AiOutlinePlus />
                   </div>
@@ -73,12 +80,12 @@ export default function Series() {
                   <div className='w-10 h-10 text-white text-lg bg-gray-950 rounded-lg cursor-pointer flex items-center justify-center'>
                     <RxSpeakerLoud />
                   </div>
-                </div> */}
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="pb-24">
         <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           <div className="lg:col-span-2 space-y-4">

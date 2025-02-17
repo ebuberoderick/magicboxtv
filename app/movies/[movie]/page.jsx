@@ -173,7 +173,7 @@ async function Page({ params }) {
       
       <VideoPlayer movieInfo={movieInfo} />
 
-      <div className="pb- 24">
+      <div className="pb-24">
         <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           <div className="lg:col-span-2 space-y-4">
             <div className="px-6 text-sm font-medium space-y-4 md:text-base lg:px-12 py-6 lg:py-10 bg-gray-900/50 rounded-lg">

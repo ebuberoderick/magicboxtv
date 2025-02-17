@@ -4,18 +4,15 @@ import AppButton from './AppButton';
 import { IoPlay } from "react-icons/io5";
 
 function VideoPlayer({ movieInfo }) {
-
     const [playing, setPlaying] = useState(false);
     const videoRef = useRef(null);
-
-
 
     return (
         <div>
             <div className={`${!playing && "h-screen"} bg-gray-950 pt-24 pb-10 px-4`}>
 
                 <div className={`${!playing && "hidden"}`}>
-                    <video ref={videoRef} onPause={() => setPlaying(false)} controls className="w-full h-full object-cover" src={movieInfo?.file_mp4}></video>
+                    <video ref={videoRef} autoPlay={playing} onPause={() => setPlaying(false)} controls className="w-full h-full object-cover" src={movieInfo?.file_mp4}></video>
                 </div>
                 <div
                     className={`${playing && "hidden"} overflow-hidden h-full max-w-7xl mx-auto rounded-lg bg-cover bg-center `}
