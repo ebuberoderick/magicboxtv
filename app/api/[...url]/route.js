@@ -8,10 +8,7 @@ export async function GET(request, { params }) {
   const slugs = (await params).url;
   const url = slugs.join("/");
   const searchParams = request.nextUrl.searchParams;
-<<<<<<< HEAD
-=======
   const urlParams = Object.fromEntries(searchParams.entries());
->>>>>>> main
 
   const headersList = await headers();
   const msisdn = headersList.get("msisdn");
