@@ -1,11 +1,8 @@
 import React from "react";
 import Footer from "../molecules/Footer";
 import NavBar from "../molecules/NavBar";
-import { headers } from "next/headers";
 
 function AppLayout({ children, active }) {
-
-
   return (
     <>
       <NavBar active={active} />
@@ -14,6 +11,5 @@ function AppLayout({ children, active }) {
     </>
   );
 }
-
 
 export default AppLayout;
