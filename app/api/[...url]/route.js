@@ -15,8 +15,39 @@ export async function GET(request, { params }) {
   const config = {
     baseURL: API_BASE_URL,
     method: "GET",
-    url: `${url}`,
+    url,
     params: searchParams,
+  };
+
+  if (msisdn) {
+    config.headers = {
+      Msisdn: msisdn,
+    };
+  }
+
+  try {
+    const response = await http(config);
+
+    return Response.json(response.data, { status: response.status });
+  } catch (error) {
+    const err = error?.response;
+    return Response.json(err?.data, { status: err?.status ?? 500 });
+  }
+}
+
+export async function POST(request, { params }) {
+  const slugs = (await params).url;
+  const url = slugs.join("/");
+  const body = await request.json();
+
+  const headersList = await headers();
+  const msisdn = headersList.get("msisdn");
+
+  const config = {
+    baseURL: API_BASE_URL,
+    method: "POST",
+    url,
+    data: body,
   };
 
   if (msisdn) {
