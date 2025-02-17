@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { IoArrowDown, IoTime } from "react-icons/io5";
 import { HiOutlinePlay } from "react-icons/hi";
 
-function SeasonDetails({ data }) {
+function SeasonDetails({ data, activeEpisode ,setActiveEpisode }) {
     const [showEpisodes, setShowEpisodes] = useState(false)
 
     return (
@@ -25,7 +25,7 @@ function SeasonDetails({ data }) {
             <div className={`${showEpisodes ? "block" : "hidden"} space-y-6 sm:space-y-0 md:space-y-6 lg:space-y-0 lg:*:border-t lg:last:border-b sm:*:border-t sm:last:border-b md:*:border-t-0 md:last:border-b-0 last:border-gray-800 *:border-gray-800`}>
                 {
                     data?.map((index) => (
-                        <div key={index.id} className="sm:flex md:block lg:flex space-y-4 sm:space-y-0 md:space-y-4 lg:space-y-0 items-center rounded-2xl sm:rounded-none md:rounded-2xl lg:rounded-none py-8 bg-gray-800/40 px-6 sm:px-0 md:px-5 lg:px-0 md:bg-gray-800/40 sm:bg-[#00000000] lg:bg-[#00000000]  justify-between gap-4">
+                        <div onClick={() => setActiveEpisode(index)} key={index.id} className="sm:flex md:block lg:flex space-y-4 sm:space-y-0 md:space-y-4 lg:space-y-0 items-center rounded-2xl sm:rounded-none md:rounded-2xl lg:rounded-none py-8 bg-gray-800/40 px-6 sm:px-0 md:px-5 lg:px-0 md:bg-gray-800/40 sm:bg-[#00000000] lg:bg-[#00000000]  justify-between gap-4">
                             <div className='flex w-full sm:w-auto md:w-full lg:w-auto items-center gap-5'>
                                 <div className='sm:order-1 md:order-none lg:order-1 w-full flex-grow'>
                                     <div className='sm:w-32 md:w-auto lg:w-44 w-full h-28 bg-gray-700 relative overflow-hidden rounded-lg'>
@@ -45,6 +45,9 @@ function SeasonDetails({ data }) {
                                     </div>
                                 </div>
                                 <div className='text-gray-500 font-normal'>{index?.description}</div>
+                                {
+                                    index?.id === activeEpisode?.id && <div className='px-4 py-1 rounded-3xl border text-white border-orange inline-block text-xs bg-orange/50'>Playing Now</div>
+                                }
                             </div>
                         </div>
                     ))
