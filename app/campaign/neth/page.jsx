@@ -2,10 +2,10 @@ import React from "react";
 import { postCampaign } from "../../../services/authService";
 import { redirect } from "next/navigation";
 
-const MobplusPage = async ({ searchParams: searchParamsPromise }) => {
+const TCPage = async ({ searchParams: searchParamsPromise }) => {
   const { clickid, partner, telco, pubid } = await searchParamsPromise;
 
-  const { data, status } = await postCampaign("/api/ums/provider/mobplus", {
+  const { data, status } = await postCampaign("/api/ums/provider/neth", {
     clickid,
     partner,
     telco,
@@ -28,4 +28,4 @@ const MobplusPage = async ({ searchParams: searchParamsPromise }) => {
   );
 };
 
-export default MobplusPage;
+export default TCPage;
