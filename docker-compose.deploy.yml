@@ -8,7 +8,7 @@ volumes:
 
 services:
   assets:
-    image: magicbox-assets
+    image: magicbox
     build:
       context: .
       dockerfile: next.Dockerfile
