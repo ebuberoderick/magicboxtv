@@ -3,7 +3,6 @@ import Footer from "../molecules/Footer";
 import NavBar from "../molecules/NavBar";
 
 function AppLayout({ children, active }) {
-
   return (
     <>
       <NavBar active={active} />
@@ -12,6 +11,5 @@ function AppLayout({ children, active }) {
     </>
   );
 }
-
 
 export default AppLayout;

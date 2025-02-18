@@ -1,0 +1,36 @@
+volumes:
+  node_modules:
+    name: magicbox_assets_node_modules
+  proxy_data:
+    name: magicbox_proxy_data
+  letsencrypt:
+    name: magicbox_letsencrypt
+
+services:
+  assets:
+    image: magicbox
+    build:
+      context: .
+      dockerfile: next.Dockerfile
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./:/code/assets
+      - node_modules:/code/assets/node_modules
+    ports:
+      - "5173:5173"
+    env_file:
+      - .env
+
+  proxy:
+    image: jc21/nginx-proxy-manager:latest
+    container_name: nginx_proxy_manager
+    ports:
+      - "80:80"
+      - "443:443"
+      - "81:81"
+    volumes:
+      - proxy_data:/var/www
+      - letsencrypt:/etc/letsencrypt
+    depends_on:
+      - assets
