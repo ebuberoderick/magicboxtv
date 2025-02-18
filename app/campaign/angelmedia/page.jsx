@@ -12,18 +12,18 @@ const AngelMediaPage = async ({ searchParams: searchParamsPromise }) => {
     pubid,
   });
 
-  if (status) {
-    if (data?.action === "redirect") {
-      redirect(data?.url);
-    }
-    if (data?.action === "homepage") {
-      redirect("/");
-    }
-  }
+  // if (status) {
+  //   if (data?.action === "redirect") {
+  //     redirect(data?.url);
+  //   }
+  //   if (data?.action === "homepage") {
+  //     redirect("/");
+  //   }
+  // }
 
   return (
     <div className="p-4">
-      <h3 className="text-white text-center text-2xl">{data?.message}</h3>
+      <h3 className="text-white text-center text-2xl">{data?.message} {data?.msisdn}</h3>
     </div>
   );
 };
