@@ -14,6 +14,7 @@ import AppButton from "../../components/organisms/AppButton";
 import VideoPlayer from "../../components/organisms/VideoPlayer";
 import AppLayout from "../../components/layouts/appLayout";
 import { fetchMovieInfoAPI, getMsisdn } from "../../../services/authService";
+import { useEffect } from "react";
 
 function DescriptionCard({ data }) {
   return (
@@ -163,15 +164,23 @@ function DescriptionCard({ data }) {
 }
 
 async function Page({ params }) {
-  const { movie } = await params;
+  const [movieInfo, setMovieInfo] = useState({});
 
-  const { data: msisdn } = await getMsisdn();
+  const fetchDetails = async () => {
+    const { movie } = await params;
 
-  console.log({ movies: msisdn });
+    const { data: msisdn } = await getMsisdn();
 
-  const { data, status } = await fetchMovieInfoAPI(movie);
+    console.log(msisdn);
 
-  const movieInfo = status ? data : {};
+    const { data, status } = await fetchMovieInfoAPI(movie);
+
+    setMovieInfo(status ? data : {});
+  };
+
+  useEffect(() => {
+    fetchDetails();
+  }, []);
 
   return (
     <AppLayout active="movies">
