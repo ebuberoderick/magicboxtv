@@ -13,8 +13,6 @@ export async function GET(request, { params }) {
   const headersList = await headers();
   const msisdn = headersList.get("msisdn");
 
-  console.log(msisdn, headersList.get("Msisdn"), 'GET')
-
   const config = {
     baseURL: API_BASE_URL,
     method: "GET",
@@ -44,8 +42,6 @@ export async function POST(request, { params }) {
   const body = await request.json();
   const searchParams = request.nextUrl.searchParams;
   const urlParams = Object.fromEntries(searchParams.entries());
-
-  console.log(msisdn, headersList.get("Msisdn"), 'POST')
 
   const headersList = await headers();
   const msisdn = headersList.get("msisdn");
