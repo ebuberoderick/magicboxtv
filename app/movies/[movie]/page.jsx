@@ -15,7 +15,7 @@ import AppButton from "../../components/organisms/AppButton";
 import VideoPlayer from "../../components/organisms/VideoPlayer";
 import AppLayout from "../../components/layouts/appLayout";
 import { fetchMovieInfoAPI, getMsisdn } from "../../../services/authService";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function DescriptionCard({ data }) {
   return (
