@@ -27,6 +27,8 @@ export const apiWithAuth = axios.create({
 
 apiWithOutAuth.interceptors.request.use(
   async (config) => {
+
+    console.log(config, 'config')
     const msisdn = ls.get("magicboxtv", { decrypt: true });
     if (msisdn) {
       config.params = { ...config.params, msisdn };
@@ -54,8 +56,6 @@ apiWithAuth.interceptors.request.use(
 export const http = async ({ requireToken = false, ...config }) => {
   const axiosInstance = requireToken ? apiWithAuth : apiWithOutAuth;
   const response = await axiosInstance(config);
-
-  console.log(`resp ${response}`);
 
   return response;
 };
