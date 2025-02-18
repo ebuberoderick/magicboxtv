@@ -4,7 +4,8 @@ import { NextResponse } from "next/server";
 export async function middleware(request) {
   const headersList = await headers();
   const msisdn = headersList.get("msisdn");
-  console.log({ middleware: msisdn });
+  const requestHeaders = new Headers(request.headers)
+  console.log({ middleware: msisdn, browser: requestHeaders.get("msisdn") });
   return NextResponse.next();
 }
 
