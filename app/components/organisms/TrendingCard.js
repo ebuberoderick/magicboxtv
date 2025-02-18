@@ -1,7 +1,6 @@
 import React from "react";
 import { IoTime, IoEye } from "react-icons/io5";
 import { BsCollectionFill } from "react-icons/bs";
-import { FaStar } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -56,8 +55,3 @@ function TrendingCard({ movie, viewsType, series }) {
 }
 
 export default TrendingCard;
-
-// background: #008080;
-// background: linear-gradient(to left, #008080 0%, #005757 100%);
-// -webkit-background-clip: text;
-// -webkit-text-fill-color: transparent;

@@ -11,7 +11,6 @@ function SeasonDetails({ data, activeEpisode ,setActiveEpisode }) {
         <div className="bg-gray-950 text-sm rounded-lg p-3 lg:p-4 lg:px-8 space-y-2 border border-gray-800 font-semibold">
             <div className="flex items-center justify-between">
                 <div className='flex items-center gap-2'>
-                    {/* <div className='font-semibold lg:text-xl text-white'>Season 01</div> */}
                     <div className='font-medium text-sm lg:text-base text-gray-400'>{data?.length} Episodes</div>
                 </div>
                 <div

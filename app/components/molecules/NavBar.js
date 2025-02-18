@@ -13,6 +13,7 @@ function NavBar({ active }) {
     const [isOpen, setIsOpen] = useState(false);
     const msisdn = ls.get("magicboxtv", { decrypt: true })
 
+    
     function generateRandomString(length) {
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         let result = '';
@@ -22,9 +23,7 @@ function NavBar({ active }) {
         return result;
     }
     
-
     const str = generateRandomString(8)
-
 
     return (
         <div className='fixed z-50 backdrop-blur-md w-screen top-0 right-0'>

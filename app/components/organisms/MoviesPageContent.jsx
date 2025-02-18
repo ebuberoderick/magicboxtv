@@ -118,13 +118,6 @@ const MoviesPageContent = ({ genres, trending }) => {
                 </div>
               ))}
             </EmblaCarousel>
-            {/* <EmblaCarousel title="Popular Top 10 In Genres" options={{ align: 'start', dragFree: true, loop: false }}>
-          {genres.map((data, i) => (
-            <div className="[flex:_0_0_70%] md:[flex:_0_0_23.5%]" key={i}>
-              <GenresCard genres={data} badge />
-            </div>
-          ))}
-        </EmblaCarousel> */}
           </div>
         </div>
       </div>
