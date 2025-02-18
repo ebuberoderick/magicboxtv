@@ -4,7 +4,6 @@ import { postCampaign } from "../../../services/authService";
 import { redirect, useSearchParams } from "next/navigation";
 
 const Moblus = () => {
-  // const { clickid, partner, telco, pubid } = await searchParamsPromise;
   const searchParams = useSearchParams();
 
   const { clickid, partner, telco, pubid } = Object.fromEntries(
@@ -35,11 +34,7 @@ const Moblus = () => {
     onPost();
   }, []);
 
-  return (
-    <div className="p-4">
-      {/* <h3 className="text-white text-center text-2xl">{data?.message}</h3> */}
-    </div>
-  );
+  return <div />;
 };
 
 const MobplusPage = () => {
