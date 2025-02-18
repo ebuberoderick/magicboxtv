@@ -16,6 +16,7 @@ import VideoPlayer from "../../components/organisms/VideoPlayer";
 import AppLayout from "../../components/layouts/appLayout";
 import { fetchMovieInfoAPI, getMsisdn } from "../../../services/authService";
 import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 
 function DescriptionCard({ data }) {
   return (
@@ -164,11 +165,11 @@ function DescriptionCard({ data }) {
   );
 }
 
-async function Page({ params }) {
+function Page() {
   const [movieInfo, setMovieInfo] = useState({});
+  const { movie } = useParams();
 
   const fetchDetails = async () => {
-    const { movie } = await params;
 
     const { data: msisdn } = await getMsisdn();
 
