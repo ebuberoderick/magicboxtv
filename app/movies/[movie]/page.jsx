@@ -1,3 +1,4 @@
+"use client";
 import { AiOutlinePlus } from "react-icons/ai";
 import { TiThumbsUp } from "react-icons/ti";
 import { IoPlay } from "react-icons/io5";
