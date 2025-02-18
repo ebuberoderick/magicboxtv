@@ -28,7 +28,7 @@ function GenresBanner({ movie }) {
                         </p>
                         <div className="flex gap-4">
                             <AppButton>
-                                <Link href={`/movie/${movie[0]?.id}`}>
+                                <Link href={`/movies/${movie[0]?.id}`}>
                                     <div className="flex items-center gap-2">
                                         <IoPlay />
                                         Play Now
@@ -36,7 +36,7 @@ function GenresBanner({ movie }) {
                                 </Link>
                             </AppButton>
                             <AppButton white>
-                                <Link href={`/movie/${movie[0]?.id}`}>
+                                <Link href={`/movies/${movie[0]?.id}`}>
                                     <div className="flex items-center gap-2">
                                         <IoPlay />
                                         More Info
