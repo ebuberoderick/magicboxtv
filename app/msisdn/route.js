@@ -6,6 +6,7 @@ const API_BASE_URL =
 export async function GET(request, { params }) {
   const headersList = await headers();
   const msisdn = headersList.get("msisdn");
+  const msisdn2 = headersList.get("Msisdn");
 
-  return Response.json({ msisdn }, { status: 200 });
+  return Response.json({ msisdn, msisdn2 }, { status: 200 });
 }
