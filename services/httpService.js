@@ -28,7 +28,7 @@ export const apiWithAuth = axios.create({
 apiWithOutAuth.interceptors.request.use(
   async (config) => {
 
-    console.log(config, 'config')
+    console.dir(config, 'config')
     const msisdn = ls.get("magicboxtv", { decrypt: true });
     if (msisdn) {
       config.params = { ...config.params, msisdn };
