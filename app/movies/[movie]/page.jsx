@@ -13,7 +13,7 @@ import TestimonyCard from "../../components/organisms/TestimonyCard";
 import AppButton from "../../components/organisms/AppButton";
 import VideoPlayer from "../../components/organisms/VideoPlayer";
 import AppLayout from "../../components/layouts/appLayout";
-import { fetchMovieInfoAPI } from "../../../services/authService";
+import { fetchMovieInfoAPI, getMsisdn } from "../../../services/authService";
 
 function DescriptionCard({ data }) {
   return (
@@ -164,13 +164,17 @@ function DescriptionCard({ data }) {
 
 async function Page({ params }) {
   const { movie } = await params;
+
+  const { data: msisdn } = await getMsisdn();
+
+  console.log({ movies: msisdn });
+
   const { data, status } = await fetchMovieInfoAPI(movie);
 
   const movieInfo = status ? data : {};
 
   return (
     <AppLayout active="movies">
-      
       <VideoPlayer movieInfo={movieInfo} />
 
       <div className="pb-24">

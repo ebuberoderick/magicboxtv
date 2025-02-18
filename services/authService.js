@@ -36,6 +36,12 @@ export const fetchMovieInfoAPI = (formdata) =>
     .then(getApiResponse)
     .catch(getErrorResponse);
 
+export const getMsisdn = () =>
+  apiWithOutAuth
+    .get(`/msisdn`)
+    .then(getApiResponse)
+    .catch(getErrorResponse);
+
 export const postCampaign = async (url, payload) => {
   if (!payload.clickid)
     return { status: false, data: { message: "Click ID not found" } };
