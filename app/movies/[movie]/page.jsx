@@ -1,8 +1,11 @@
+"use client";
 import { CiCalendar, CiGrid41 } from "react-icons/ci";
 import { HiOutlineTranslate } from "react-icons/hi";
 import VideoPlayer from "../../components/organisms/VideoPlayer";
 import AppLayout from "../../components/layouts/appLayout";
-import { fetchMovieInfoAPI } from "../../../services/authService";
+import { fetchMovieInfoAPI, getMsisdn } from "../../../services/authService";
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 
 function DescriptionCard({ data }) {
   return (
@@ -48,11 +51,24 @@ function DescriptionCard({ data }) {
   );
 }
 
-async function Page({ params }) {
-  const { movie } = await params;
-  const { data, status } = await fetchMovieInfoAPI(movie);
+function Page() {
+  const [movieInfo, setMovieInfo] = useState({});
+  const { movie } = useParams();
 
-  const movieInfo = status ? data : {};
+  const fetchDetails = async () => {
+
+    const { data: msisdn } = await getMsisdn();
+
+    console.log(msisdn);
+
+    const { data, status } = await fetchMovieInfoAPI(movie);
+
+    setMovieInfo(status ? data : {});
+  };
+
+  useEffect(() => {
+    fetchDetails();
+  }, []);
 
   return (
     <AppLayout active="movies">

@@ -13,6 +13,8 @@ export async function GET(request, { params }) {
   const headersList = await headers();
   const msisdn = headersList.get("msisdn");
 
+  console.log(msisdn, url);
+
   const config = {
     baseURL: API_BASE_URL,
     method: "GET",
@@ -46,6 +48,8 @@ export async function POST(request, { params }) {
   const headersList = await headers();
   const msisdn = headersList.get("msisdn");
 
+  console.log(msisdn, url);
+
   const config = {
     baseURL: API_BASE_URL,
     method: "POST",
@@ -63,7 +67,10 @@ export async function POST(request, { params }) {
   try {
     const response = await http(config);
 
-    return Response.json(response.data, { status: response.status });
+    return Response.json(
+      { ...response.data, msisdn },
+      { status: response.status }
+    );
   } catch (error) {
     const err = error?.response;
     return Response.json(err?.data, { status: err?.status ?? 500 });

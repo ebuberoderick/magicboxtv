@@ -55,8 +55,6 @@ export const http = async ({ requireToken = false, ...config }) => {
   const axiosInstance = requireToken ? apiWithAuth : apiWithOutAuth;
   const response = await axiosInstance(config);
 
-  console.log(`resp ${response}`);
-
   return response;
 };
 
