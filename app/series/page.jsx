@@ -2,7 +2,7 @@
 import AppLayout from "../components/layouts/appLayout";
 import { IoPlay } from "react-icons/io5";
 import AppButton from "../components/organisms/AppButton";
-import { fetchAPI } from "../../services/authService";
+import { getContentsAPI } from "../../services/authService";
 import { useEffect, useState } from "react";
 import EmblaCarousel from "../components/molecules/EmblaCarousel";
 import TrendingCard from "../components/organisms/TrendingCard";
@@ -12,7 +12,9 @@ export default function Series() {
   const [trendingSeries, setTrendingSeries] = useState([]);
 
   const fetchTrendingSeries = async () => {
-    const { status, data } = await fetchAPI("category=series");
+    const { data, status } = await getContentsAPI({
+      category: 'series',
+    });
     if (status) {
       setTrendingSeries(data?.results);
     }

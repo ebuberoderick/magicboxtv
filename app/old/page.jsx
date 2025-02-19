@@ -8,17 +8,19 @@ import HomeCarousel from "../components/organisms/HomeCarousel";
 import MovieCard from "../components/organisms/MovieCard";
 import GenresCard from "../components/organisms/GenresCard";
 import TrendingCard from "../components/organisms/TrendingCard";
-import { fetchAPI, fetchGenresAPI } from "../../services/authService";
+import { fetchGenresAPI, getContentsAPI } from "../../services/authService";
 import Link from "next/link";
 
 const SLIDE_COUNT = 7;
 const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
 
 export default async function Home() {
-  const { data: latestData } = await fetchAPI("latest=true");
+  const { data: latestData } = await getContentsAPI({ latest: true });
   const { data: genresData } = await fetchGenresAPI();
-  const { data: trendingData } = await fetchAPI("trending=true");
-  const { data: trendingSeriesData } = await fetchAPI("category=series");
+  const { data: trendingData } = await getContentsAPI({ trending: true });
+  const { data: trendingSeriesData } = await getContentsAPI({
+    category: 'series',
+  });
   // const { data: romanceData } = await fetchAPI("romance=true");
 
   const movie = latestData?.results || [];

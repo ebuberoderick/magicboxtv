@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import { IoArrowForward } from "react-icons/io5";
-import { fetchGenresMovieAPI } from '../../../services/authService';
+import { getContentsAPI } from '../../../services/authService';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -10,7 +10,7 @@ function GenresCard({ badge, genres }) {
     const [genresMovies, setGenresMovies] = useState([])
 
     const fetchgenresMovies = async () => {
-        const { status, data } = await fetchGenresMovieAPI({ slug: genres?.slug })
+        const { status, data } = await getContentsAPI({ genre: genres?.slug })
         if (status) {
             setGenresMovies(data?.results);
         }
