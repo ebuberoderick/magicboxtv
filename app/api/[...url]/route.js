@@ -26,8 +26,6 @@ export async function GET(request, { params }) {
     };
   }
 
-  console.dir({ config })
-
   try {
     const response = await http(config);
 
