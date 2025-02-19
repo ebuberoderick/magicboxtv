@@ -53,7 +53,7 @@ const HomeCarousel = ({ genres, movies }) => {
               title="New Releases"
               options={{ align: "start", dragFree: true, loop: false }}
             >
-              {movie.map((data, i) => (
+              {movies.map((data, i) => (
                 <div className="[flex:_0_0_70%]" key={i}>
                   <TrendingCard movie={data} viewsType="rating" />
                 </div>
