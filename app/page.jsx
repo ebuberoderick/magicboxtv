@@ -19,15 +19,15 @@ export default async function Home() {
   const { data: genresData } = await fetchGenresAPI();
   const { data: trendingData } = await fetchAPI("trending=true");
   const { data: trendingSeriesData } = await fetchAPI("category=series");
-  const { data: romanceData } = await fetchAPI("romance=true");
+  // const { data: romanceData } = await fetchAPI("romance=true");
 
   const movie = latestData?.results || [];
   const genres = genresData?.results || [];
   const trending = trendingData?.results || [];
   const trendingSeries = trendingSeriesData?.results || [];
-  const romance = romanceData?.results || [];
+  // const romance = romanceData?.results || [];
 
-  console.log({ movie, genres, trending, trendingSeries, romance });
+  console.log({ movie, genres, trending, trendingSeries });
 
   return (
     <AppLayout active="home">
@@ -44,7 +44,7 @@ export default async function Home() {
               </div>
             ))}
           </EmblaCarousel>
-          <EmblaCarousel
+          {/* <EmblaCarousel
             title="Romance"
             options={{ align: "start", dragFree: true, loop: true }}
           >
@@ -53,7 +53,7 @@ export default async function Home() {
                 <MovieCard movie={data} />
               </div>
             ))}
-          </EmblaCarousel>
+          </EmblaCarousel> */}
         </div>
       </div>
 
