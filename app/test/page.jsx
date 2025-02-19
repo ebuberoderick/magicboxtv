@@ -1,14 +1,14 @@
 import Image from "next/image";
-import AppLayout from "./components/layouts/appLayout";
-import AppBanner from "./components/molecules/AppBanner";
-import AppButton from "./components/organisms/AppButton";
+import AppLayout from "../components/layouts/appLayout";
+import AppBanner from "../components/molecules/AppBanner";
+import AppButton from "../components/organisms/AppButton";
 import { IoPlay } from "react-icons/io5";
-import EmblaCarousel from "./components/molecules/EmblaCarousel";
-import HomeCarousel from "./components/organisms/HomeCarousel";
-import MovieCard from "./components/organisms/MovieCard";
-import GenresCard from "./components/organisms/GenresCard";
-import TrendingCard from "./components/organisms/TrendingCard";
-import { fetchAPI, fetchGenresAPI } from "../services/authService";
+import EmblaCarousel from "../components/molecules/EmblaCarousel";
+import HomeCarousel from "../components/organisms/HomeCarousel";
+import MovieCard from "../components/organisms/MovieCard";
+import GenresCard from "../components/organisms/GenresCard";
+import TrendingCard from "../components/organisms/TrendingCard";
+import { fetchAPI, fetchGenresAPI } from "../../services/authService";
 import Link from "next/link";
 
 const SLIDE_COUNT = 7;

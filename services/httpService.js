@@ -67,7 +67,7 @@ export const getApiResponse = (data) => {
 };
 
 export const getErrorResponse = (error) => {
-  console.log(error?.response?.data);
+  console.log(error?.message);
   if (error?.response?.status === 401) {
     Cookies.remove("magicboxtv");
     window !== "undefined" && window.location.reload();

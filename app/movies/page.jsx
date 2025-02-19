@@ -16,6 +16,8 @@ export default async function Movies({ searchParams }) {
 
   const { genre } = await searchParams;
 
+  console.log({ genre })
+
   const { data: genresResultsData } = await fetchGenresMovieAPI({ slug: genre !== undefined ? genre.split("()").join("-") : "" });
   const genresResults = genresResultsData?.results || [];
 
