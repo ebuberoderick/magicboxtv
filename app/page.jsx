@@ -27,6 +27,8 @@ export default async function Home() {
   const trendingSeries = trendingSeriesData?.results || [];
   const romance = romanceData?.results || [];
 
+  console.log({ movie, genres, trending, trendingSeries, romance });
+
   return (
     <AppLayout active="home">
       <AppBanner movie={movie} />

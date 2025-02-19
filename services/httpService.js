@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 export const TOKEN = `Bearer ${ls.get("magicboxtv", { decrypt: true })}`;
 
 export const apiWithOutAuth = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_HOST_URL || "http://localhost:3000",
+  baseURL: process.env.NEXT_PUBLIC_API_HOST_URL || "http://localhost:3001",
   headers: {
     "Cache-Control": "no-cache",
     Pragma: "no-cache",
@@ -15,7 +15,7 @@ export const apiWithOutAuth = axios.create({
 });
 
 export const apiWithAuth = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_HOST_URL || "http://localhost:3000",
+  baseURL: process.env.NEXT_PUBLIC_API_HOST_URL || "http://localhost:3001",
   headers: {
     "Cache-Control": "no-cache",
     Pragma: "no-cache",
@@ -66,6 +66,7 @@ export const getApiResponse = (data) => {
 };
 
 export const getErrorResponse = (error) => {
+  console.log(error?.response?.data);
   if (error?.response?.status === 401) {
     Cookies.remove("magicboxtv");
     window !== "undefined" && window.location.reload();
