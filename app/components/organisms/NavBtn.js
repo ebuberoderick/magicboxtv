@@ -1,10 +1,12 @@
-import React from 'react'
+"use client"
+import React, { useEffect, useState } from 'react'
 import AppButton from './AppButton';
 import Link from 'next/link';
 import ls from "localstorage-slim";
 
 function NavBtn() {
 
+    const [str, setStr] = useState("")
 
     const msisdn = ls.get("magicboxtv", { decrypt: true })
 
@@ -16,8 +18,11 @@ function NavBtn() {
         }
         return result;
     }
-    
-    const str = generateRandomString(8)
+
+    useEffect(() => {
+        setStr(generateRandomString(8))
+    }, [])
+
     return (
         <div>
             {
