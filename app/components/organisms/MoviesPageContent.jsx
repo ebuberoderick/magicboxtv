@@ -7,7 +7,7 @@ import GenresCard from "./GenresCard";
 const SLIDE_COUNT = 7;
 const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
 
-const MoviesPageContent = ({ genres, trending }) => {
+const MoviesPageContent = ({ genres, trending , trendingSeries}) => {
   const [activeTab, setActiveTab] = useState("movies");
 
   return (
@@ -86,9 +86,9 @@ const MoviesPageContent = ({ genres, trending }) => {
               title="Must - Watch Movies"
               options={{ align: "start", dragFree: true, loop: false }}
             >
-              {SLIDES.map((index, i) => (
+              {trendingSeries.map((data, i) => (
                 <div className="[flex:_0_0_70%] md:[flex:_0_0_23.5%]" key={i}>
-                  <TrendingCard viewsType="rating" />
+                  <TrendingCard series movie={data} viewsType="rating" />
                 </div>
               ))}
             </EmblaCarousel>
@@ -118,13 +118,6 @@ const MoviesPageContent = ({ genres, trending }) => {
                 </div>
               ))}
             </EmblaCarousel>
-            {/* <EmblaCarousel title="Popular Top 10 In Genres" options={{ align: 'start', dragFree: true, loop: false }}>
-          {genres.map((data, i) => (
-            <div className="[flex:_0_0_70%] md:[flex:_0_0_23.5%]" key={i}>
-              <GenresCard genres={data} badge />
-            </div>
-          ))}
-        </EmblaCarousel> */}
           </div>
         </div>
       </div>

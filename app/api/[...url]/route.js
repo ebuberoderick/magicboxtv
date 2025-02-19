@@ -13,8 +13,6 @@ export async function GET(request, { params }) {
   const headersList = await headers();
   const msisdn = headersList.get("msisdn");
 
-  console.log(msisdn, url);
-
   const config = {
     baseURL: API_BASE_URL,
     method: "GET",

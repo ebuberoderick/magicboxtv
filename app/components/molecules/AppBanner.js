@@ -22,15 +22,6 @@ function AppBanner({ movie }) {
                                         </div>
                                     </Link>
                                 </AppButton>
-                                {/* <div className='w-10 h-10 text-white text-lg bg-gray-950 rounded-lg cursor-pointer flex items-center justify-center'>
-                                    <AiOutlinePlus />
-                                </div>
-                                <div className='w-10 h-10 text-white text-lg bg-gray-950 rounded-lg cursor-pointer flex items-center justify-center'>
-                                    <TiThumbsUp />
-                                </div>
-                                <div className='w-10 h-10 text-white text-lg bg-gray-950 rounded-lg cursor-pointer flex items-center justify-center'>
-                                    <RxSpeakerLoud />
-                                </div> */}
                             </div>
                         </div>
                     </div>

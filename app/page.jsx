@@ -91,7 +91,7 @@ export default async function Home() {
             </p>
             <div className="flex gap-4">
               <AppButton>
-                <Link href={`/movie/${movie[0]?.id}`}>
+                <Link href={`/movies/${movie[0]?.id}`}>
                   <div className="flex items-center gap-2">
                     <IoPlay />
                     Play Now
@@ -99,7 +99,7 @@ export default async function Home() {
                 </Link>
               </AppButton>
               <AppButton white>
-                <Link href={`/movie/${movie[0]?.id}`}>
+                <Link href={`/movies/${movie[0]?.id}`}>
                   <div className="flex items-center gap-2">
                     <IoPlay />
                     More Info
@@ -149,9 +149,9 @@ export default async function Home() {
             title="Must - Watch Movies"
             options={{ align: "start", dragFree: true, loop: false }}
           >
-            {SLIDES.map((index, i) => (
-              <div className="[flex:_0_0_70%] md:[flex:_0_0_20%]" key={i}>
-                <TrendingCard viewsType="rating" />
+            {trendingSeries.map((data) => (
+              <div className="[flex:_0_0_70%] md:[flex:_0_0_20%]" key={data.id}>
+                <TrendingCard series movie={data} viewsType="rating" />
               </div>
             ))}
           </EmblaCarousel>
