@@ -1,4 +1,5 @@
 const nextConfig = {
+  reactStrictMode: true,
   images: {
     domains: [
       "magicbox-files.nyc3.digitaloceanspaces.com",
