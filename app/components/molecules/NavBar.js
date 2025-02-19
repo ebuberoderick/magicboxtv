@@ -6,25 +6,11 @@ import { FiSearch } from "react-icons/fi";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { FaRegBell } from "react-icons/fa6";
 import AppNavLink from '../organisms/AppNavLink';
-import ls from "localstorage-slim";
-import AppButton from '../organisms/AppButton';
+import NavBtn from '../organisms/NavBtn';
 
 function NavBar({ active }) {
     const [isOpen, setIsOpen] = useState(false);
-    const msisdn = ls.get("magicboxtv", { decrypt: true })
-
     
-    function generateRandomString(length) {
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        let result = '';
-        for (let i = 0; i < length; i++) {
-            result += characters.charAt(Math.floor(Math.random() * characters.length));
-        }
-        return result;
-    }
-    
-    const str = generateRandomString(8)
-
     return (
         <div className='fixed z-50 backdrop-blur-md w-screen top-0 right-0'>
             <div className='max-w-7xl justify-between p-4 items-center mx-auto flex'>
@@ -36,13 +22,7 @@ function NavBar({ active }) {
                         <AppNavLink active={active} text="home" />
                         <AppNavLink active={active} text="movies" />
                         <AppNavLink active={active} text="series" />
-                        {
-                            (msisdn === undefined || msisdn === null) ? (
-                                <Link target='_blank' href={`http://ng-app.com/CloudIntegrated/magicbox-daily-en-doi-web?origin_banner=1&trfsrc=Organic&trxId=${str}`}>
-                                    <AppButton>Subscribe</AppButton>
-                                </Link>
-                            ) : <div className='h-full py-3 flex items-center'><div className={`bg-white py-1 capitalize text-xs rounded-lg px-6`}>{msisdn}</div></div>
-                        }
+                        <NavBtn />
                     </div>
                 </div>
                 <div className='text-white hidden text-2xl md:flex items-center'>
