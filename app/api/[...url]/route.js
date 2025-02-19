@@ -1,6 +1,5 @@
 import { headers } from "next/headers";
 import { http } from "../../../services/httpService";
-import ls from "localstorage-slim";
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL || "https://api.magicbox.tv/api/v1/";
@@ -13,11 +12,6 @@ export async function GET(request, { params }) {
 
   const headersList = await headers();
   const msisdn = headersList.get("msisdn");
-
-  ls.set("magicboxtv", msisdn, { encrypt: true });
-
-
-  console.log(msisdn, url);
 
   const config = {
     baseURL: API_BASE_URL,

@@ -93,7 +93,7 @@ export default async function Movies({ searchParams }) {
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
                     {
                       genresResults.slice(1)?.map((movie, index) => (
-                        <div key={index} className="">
+                        <div key={movie.id} className="">
                           <TrendingCard movie={movie} viewsType="rating" />
                         </div>
                       ))

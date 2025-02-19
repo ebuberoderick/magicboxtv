@@ -149,8 +149,8 @@ export default async function Home() {
             title="Must - Watch Movies"
             options={{ align: "start", dragFree: true, loop: false }}
           >
-            {trendingSeries.map((data, i) => (
-              <div className="[flex:_0_0_70%] md:[flex:_0_0_20%]" key={i}>
+            {trendingSeries.map((data) => (
+              <div className="[flex:_0_0_70%] md:[flex:_0_0_20%]" key={data.id}>
                 <TrendingCard series movie={data} viewsType="rating" />
               </div>
             ))}
