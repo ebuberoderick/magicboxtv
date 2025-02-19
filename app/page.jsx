@@ -149,9 +149,9 @@ export default async function Home() {
             title="Must - Watch Movies"
             options={{ align: "start", dragFree: true, loop: false }}
           >
-            {SLIDES.map((index, i) => (
+            {trendingSeries.map((data, i) => (
               <div className="[flex:_0_0_70%] md:[flex:_0_0_20%]" key={i}>
-                <TrendingCard viewsType="rating" />
+                <TrendingCard series movie={data} viewsType="rating" />
               </div>
             ))}
           </EmblaCarousel>

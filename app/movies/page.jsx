@@ -12,6 +12,7 @@ export default async function Movies({ searchParams }) {
   const { data: latestData } = await fetchAPI("latest");
   const { data: genresData } = await fetchGenresAPI();
   const { data: trendingData } = await fetchAPI("trending");
+  const { data: trendingSeriesData } = await fetchAPI("category=series");
 
   const { genre } = await searchParams;
 
@@ -21,6 +22,7 @@ export default async function Movies({ searchParams }) {
   const movie = latestData?.results || [];
   const genres = genresData?.results || [];
   const trending = trendingData?.results || [];
+  const trendingSeries = trendingSeriesData?.results || [];
 
   return (
     <AppLayout active="movies">
@@ -68,7 +70,7 @@ export default async function Movies({ searchParams }) {
                 </div>
               </div>
             </div>
-            <MoviesPageContent genres={genres} trending={trending} />
+            <MoviesPageContent trendingSeries={trendingSeries} genres={genres} trending={trending} />
           </div>
         ) : (
           <div className="py-24 space-y-5">

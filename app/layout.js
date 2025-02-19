@@ -1,5 +1,4 @@
-import { headers } from "next/headers";
-import ls from "localstorage-slim";
+
 import "./globals.css";
 
 export const metadata = {
@@ -9,12 +8,6 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
 
-  const getMsisdn = async () => {
-    const msisdn = await headers();
-    ls.set("magicboxtv", msisdn["msisdn"], { encrypt: true });
-  }
-
-  getMsisdn()
 
   return (
     <html lang="en">
