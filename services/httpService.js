@@ -73,7 +73,7 @@ export const getErrorResponse = (error) => {
     window !== "undefined" && window.location.reload();
   }
   if (error?.response?.status === 403) {
-    redirect(error?.response?.data?.redirect_url);
+    redirect(error?.response?.data?.redirect_url ?? '/');
   }
 
   return {
