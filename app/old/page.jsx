@@ -16,13 +16,36 @@ const SLIDE_COUNT = 7;
 const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
 
 export default async function Home() {
-  const { data: latestData } = await getContentsAPI({ latest: true });
-  const { data: genresData } = await fetchGenresAPI();
-  const { data: trendingData } = await getContentsAPI({ trending: true });
-  const { data: trendingSeriesData } = await getContentsAPI({
-    category: "series",
+  const { data: latestData, status: latestStatus } = await getContentsAPI({
+    latest: true,
   });
-  const { data: romanceData } = await getContentsAPI({ romance: true });
+  const { data: genresData, status: genresStatus } = await fetchGenresAPI();
+  const { data: trendingData, status: trendingStatus } = await getContentsAPI({
+    trending: true,
+  });
+  const { data: trendingSeriesData, status: trendingSeriesStatus } =
+    await getContentsAPI({
+      category: "series",
+    });
+  const { data: romanceData, status: romanceStatus } = await getContentsAPI({
+    romance: true,
+  });
+
+  if (
+    !latestStatus ||
+    !genresStatus ||
+    !trendingStatus ||
+    !trendingSeriesStatus ||
+    !romanceStatus
+  ) {
+    console.log(
+      latestData,
+      genresData,
+      trendingData,
+      trendingSeriesData,
+      romanceData
+    );
+  }
 
   const movie = latestData?.results || [];
   const genres = genresData?.results || [];
