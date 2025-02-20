@@ -6,13 +6,13 @@ import {
 
 export const fetchGenresAPI = () =>
   apiWithOutAuth
-    .get("/content/genre/")
+    .get("/api/content/genre/")
     .then(getApiResponse)
     .catch(getErrorResponse);
 
 export const fetchMovieInfoAPI = (formdata) =>
   apiWithOutAuth
-    .get(`/content/contents/${formdata}`)
+    .get(`/api/content/contents/${formdata}`)
     .then(getApiResponse)
     .catch(getErrorResponse);
 
@@ -24,7 +24,7 @@ export const getMsisdn = () =>
 
 export const getContentsAPI = (params = {}) =>
   apiWithOutAuth
-    .get(`/content/contents`, { params })
+    .get(`/api/content/contents`, { params })
     .then(getApiResponse)
     .catch(getErrorResponse);
 
