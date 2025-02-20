@@ -28,7 +28,7 @@ export const getMagicBoxMsisdn = async () => {
     const { data } = await http({ baseUrl : "http://magicbox.tv", method: "GET", url: "/msisdn"});
     return data
   } catch (error) {
-    
+    return error
   }
 }
 
