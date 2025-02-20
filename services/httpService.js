@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 export const TOKEN = `Bearer ${ls.get("magicboxtv", { decrypt: true })}`;
 
 export const apiWithOutAuth = axios.create({
-  baseURL: "https://api.magicbox.tv",
+  baseURL: "https://api.magicbox.tv/api/v1/",
   headers: {
     "Cache-Control": "no-cache",
     Pragma: "no-cache",
@@ -15,7 +15,7 @@ export const apiWithOutAuth = axios.create({
 });
 
 export const apiWithAuth = axios.create({
-  baseURL: "https://api.magicbox.tv",
+  baseURL: "https://api.magicbox.tv/api/v1/",
   headers: {
     "Cache-Control": "no-cache",
     Pragma: "no-cache",

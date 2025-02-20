@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 import { http } from "../../../services/httpService";
 
-const API_BASE_URL = "https://api.magicbox.tv";
+const API_BASE_URL = "https://api.magicbox.tv/api/v1/";
 
 export async function GET(request, { params }) {
   const slugs = (await params).url;
