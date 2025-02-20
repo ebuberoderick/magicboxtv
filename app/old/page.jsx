@@ -8,8 +8,9 @@ import HomeCarousel from "../components/organisms/HomeCarousel";
 import MovieCard from "../components/organisms/MovieCard";
 import GenresCard from "../components/organisms/GenresCard";
 import TrendingCard from "../components/organisms/TrendingCard";
-import { fetchGenresAPI, getContentsAPI } from "../../services/authService";
+import { fetchGenresAPI } from "../../services/authService";
 import Link from "next/link";
+import { getContentsAPI } from "@/services/authService";
 
 const SLIDE_COUNT = 7;
 const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
@@ -19,16 +20,15 @@ export default async function Home() {
   const { data: genresData } = await fetchGenresAPI();
   const { data: trendingData } = await getContentsAPI({ trending: true });
   const { data: trendingSeriesData } = await getContentsAPI({
-    category: 'series',
+    category: "series",
   });
-  // const { data: romanceData } = await fetchAPI("romance=true");
+  const { data: romanceData } = await getContentsAPI({ romance: true });
 
   const movie = latestData?.results || [];
   const genres = genresData?.results || [];
   const trending = trendingData?.results || [];
   const trendingSeries = trendingSeriesData?.results || [];
-  // const romance = romanceData?.results || [];
-
+  const romance = romanceData?.results || [];
 
   return (
     <AppLayout active="home">
@@ -45,7 +45,7 @@ export default async function Home() {
               </div>
             ))}
           </EmblaCarousel>
-          {/* <EmblaCarousel
+          <EmblaCarousel
             title="Romance"
             options={{ align: "start", dragFree: true, loop: true }}
           >
@@ -54,7 +54,7 @@ export default async function Home() {
                 <MovieCard movie={data} />
               </div>
             ))}
-          </EmblaCarousel> */}
+          </EmblaCarousel>
         </div>
       </div>
 
@@ -94,7 +94,7 @@ export default async function Home() {
             </p>
             <div className="flex gap-4">
               <AppButton>
-                <Link href={`/movies/${movie[0]?.id}`}>
+                <Link href={`/movie/${movie[0]?.id}`}>
                   <div className="flex items-center gap-2">
                     <IoPlay />
                     Play Now
@@ -102,7 +102,7 @@ export default async function Home() {
                 </Link>
               </AppButton>
               <AppButton white>
-                <Link href={`/movies/${movie[0]?.id}`}>
+                <Link href={`/movie/${movie[0]?.id}`}>
                   <div className="flex items-center gap-2">
                     <IoPlay />
                     More Info
@@ -152,9 +152,9 @@ export default async function Home() {
             title="Must - Watch Movies"
             options={{ align: "start", dragFree: true, loop: false }}
           >
-            {trendingSeries.map((data) => (
-              <div className="[flex:_0_0_70%] md:[flex:_0_0_20%]" key={data.id}>
-                <TrendingCard series movie={data} viewsType="rating" />
+            {SLIDES.map((index, i) => (
+              <div className="[flex:_0_0_70%] md:[flex:_0_0_20%]" key={i}>
+                <TrendingCard viewsType="rating" />
               </div>
             ))}
           </EmblaCarousel>
