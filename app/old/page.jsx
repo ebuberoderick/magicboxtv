@@ -8,7 +8,7 @@ import HomeCarousel from "../components/organisms/HomeCarousel";
 import MovieCard from "../components/organisms/MovieCard";
 import GenresCard from "../components/organisms/GenresCard";
 import TrendingCard from "../components/organisms/TrendingCard";
-import { fetchGenresAPI } from "../../services/authService";
+import { fetchGenresAPI, getMagicBoxMsisdn } from "../../services/authService";
 import Link from "next/link";
 import { getContentsAPI } from "@/services/authService";
 
@@ -30,6 +30,11 @@ export default async function Home() {
   const { data: romanceData, status: romanceStatus } = await getContentsAPI({
     romance: true,
   });
+
+  const msisdn = await getMagicBoxMsisdn();
+  console.log(msisdn);
+  
+
 
   if (
     !latestStatus ||

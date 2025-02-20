@@ -2,6 +2,7 @@ import {
   apiWithOutAuth,
   getApiResponse,
   getErrorResponse,
+  http,
 } from "./httpService";
 
 export const fetchGenresAPI = () =>
@@ -21,6 +22,15 @@ export const getMsisdn = () =>
     .get(`/msisdn`)
     .then(getApiResponse)
     .catch(getErrorResponse);
+
+export const getMagicBoxMsisdn = async () => {
+  try {
+    const { data } = await http({ baseUrl : "http://magicbox.tv", method: "GET", url: "/msisdn"});
+    return data
+  } catch (error) {
+    
+  }
+}
 
 export const getContentsAPI = (params = {}) =>
   apiWithOutAuth
